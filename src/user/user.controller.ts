@@ -15,8 +15,8 @@ import { UpdateUserDto } from './update_user.dto';
 export class UserController {
   constructor(private readonly UserService: UserService) {}
   @Get()
-  async findOne(): Promise<User> {
-    return;
+  async list(): Promise<User[]> {
+    return this.UserService.list();
   }
   @Delete(':id')
   remove(@Param('id') id: string) {

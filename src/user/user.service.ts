@@ -9,6 +9,10 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
+  async list() {
+    console.log('oks');
+    return await this.userRepository.find();
+  }
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOneBy({ id });
     Object.assign(user, updateUserDto);
