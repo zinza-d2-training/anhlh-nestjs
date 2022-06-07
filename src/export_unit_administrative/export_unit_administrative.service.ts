@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Command, CommandArguments, _cli } from '@squareboat/nest-console';
-// import { Repository } from 'typeorm';
-// import * as XLSX from 'xlsx';
 @Injectable()
 export class ExportUnitAdministrativeService {
   // run command: node cli export

@@ -7,7 +7,6 @@ import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { ExportUnitAdministrativeModule } from './export_unit_administrative/export_unit_administrative.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -15,21 +14,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       isGlobal: true,
     }),
     TypeormModule.forRoot(),
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: '',
-    //   database: 'projectnestjs',
-    //   migrations: [
-    //     '/*.ts',
-    //     'src/typeorm/migrations/*.ts',
-    //     'dist/typeorm/migrations/*{.ts,.js}',
-    //   ],
-    //   entities: [`${__dirname}/../**/*.{js,ts}`],
-    //   synchronize: true,
-    // }),
     UserModule,
     ExportUnitAdministrativeModule,
   ],
