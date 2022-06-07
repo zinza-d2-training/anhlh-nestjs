@@ -1,11 +1,4 @@
-import {
-  IsNotEmpty,
-  IsEmail,
-  IsString,
-  IsOptional,
-  IsNumber,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsEmail, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
   @IsOptional()

@@ -20,6 +20,7 @@ export class UserController {
   }
   @Delete(':id')
   remove(@Param('id') id: string) {
+    console.log('123', __dirname);
     return this.UserService.remove(+id);
   }
   @Patch('/:id')

@@ -6,11 +6,11 @@ const config: TypeOrmModuleOptions = {
   username: 'root',
   password: '',
   database: 'projectnestjs',
-  entities: [__dirname + '/entities/**/*{.ts,.js}'],
-  migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  //   cli: {
-  //     migrationsDir: 'src/typeorm/migrations',
-  //   },
+  migrations: [
+    'src/typeorm/migrations/*.ts',
+    'dist/typeorm/migrations/*{.ts,.js}',
+  ],
+  entities: [`${__dirname}/../**/*.{js,ts}`],
   synchronize: true,
 };
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import User from './user.entity';
+import User from '../entities/user';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateUserDto } from './update_user.dto';
@@ -10,7 +10,6 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
   async list() {
-    console.log('oks');
     return await this.userRepository.find();
   }
   async update(id: number, updateUserDto: UpdateUserDto) {
