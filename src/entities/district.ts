@@ -10,9 +10,13 @@ class District {
   @Column()
   public province_id: number;
 
-  @Column()
+  @Column({
+    type: 'timestamp',
+  })
   public created_at: Date;
-  @Column()
+  @Column({
+    type: 'timestamp',
+  })
   public updated_at: Date;
 }
 

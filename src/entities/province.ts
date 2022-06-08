@@ -6,10 +6,14 @@ class Province {
 
   @Column()
   public name: string;
-  @Column()
+  @Column({
+    type: 'timestamp',
+  })
   public created_at: Date;
 
-  @Column()
+  @Column({
+    type: 'timestamp',
+  })
   public updated_at: Date;
 }
 
