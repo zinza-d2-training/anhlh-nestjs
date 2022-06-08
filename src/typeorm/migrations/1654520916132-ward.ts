@@ -1,16 +1,20 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export class province1654520666965 implements MigrationInterface {
+export class ward1654520916132 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'provinces',
+        name: 'ward',
         columns: [
           {
             name: 'id',
             type: 'int',
             isPrimary: true,
-            length: '11',
             isGenerated: true,
             generationStrategy: 'increment',
           },
@@ -18,6 +22,10 @@ export class province1654520666965 implements MigrationInterface {
             name: 'name',
             type: 'varchar',
             length: '255',
+          },
+          {
+            name: 'district_id',
+            type: 'int',
           },
           {
             name: 'created_at',
@@ -35,9 +43,17 @@ export class province1654520666965 implements MigrationInterface {
       }),
       true,
     );
+    await queryRunner.createForeignKey(
+      'ward',
+      new TableForeignKey({
+        columnNames: ['district_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'district',
+      }),
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('province');
+    await queryRunner.dropTable('ward');
   }
 }

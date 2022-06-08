@@ -6,6 +6,7 @@ import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { ConsoleModule } from '@squareboat/nest-console';
 import { ExportUnitAdministrativeModule } from './export_unit_administrative/export_unit_administrative.module';
 
 @Module({
@@ -15,6 +16,7 @@ import { ExportUnitAdministrativeModule } from './export_unit_administrative/exp
     }),
     TypeormModule.forRoot(),
     UserModule,
+    ConsoleModule,
     ExportUnitAdministrativeModule,
   ],
   controllers: [AppController, UserController],

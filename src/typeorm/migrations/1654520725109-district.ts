@@ -1,10 +1,15 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
 export class district1654520725109 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'districts',
+        name: 'district',
         columns: [
           {
             name: 'id',
@@ -35,17 +40,16 @@ export class district1654520725109 implements MigrationInterface {
             default: 'CURRENT_TIMESTAMP',
           },
         ],
-        foreignKeys: [
-          {
-            columnNames: ['province_id'],
-            referencedColumnNames: ['id'],
-            onUpdate: 'CASCADE',
-            onDelete: 'CASCADE',
-            referencedTableName: 'province',
-          },
-        ],
       }),
       true,
+    );
+    await queryRunner.createForeignKey(
+      'district',
+      new TableForeignKey({
+        columnNames: ['province_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'province',
+      }),
     );
   }
 

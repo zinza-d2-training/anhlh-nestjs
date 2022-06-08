@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
-class Ward {
+class District {
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -8,7 +8,7 @@ class Ward {
   public name: string;
 
   @Column()
-  public district_id: number;
+  public province_id: number;
 
   @Column()
   public created_at: Date;
@@ -16,4 +16,4 @@ class Ward {
   public updated_at: Date;
 }
 
-export default Ward;
+export default District;
