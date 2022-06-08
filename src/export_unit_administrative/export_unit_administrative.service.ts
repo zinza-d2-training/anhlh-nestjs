@@ -29,29 +29,29 @@ export class ExportUnitAdministrativeService {
     const dataUnitAdministrative = XLSX.readFile(
       'src/utils/Danh sách cấp tỉnh kèm theo quận huyện, phường xã ___04_06_2022.xls',
     ).Sheets;
-    const listRecords = XLSX.utils.sheet_to_json(
+    const unitAdministratives = XLSX.utils.sheet_to_json(
       dataUnitAdministrative['Sheet1'],
     );
-    for (const record of listRecords) {
+    for (const province of unitAdministratives) {
       const isExistListProvince: boolean = provinces.some(
-        (province) => province.name == record['Tỉnh Thành Phố'],
+        (province) => province.name == province['Tỉnh Thành Phố'],
       );
       if (!isExistListProvince) {
-        provinces.push({ name: record['Tỉnh Thành Phố'] });
+        provinces.push({ name: province['Tỉnh Thành Phố'] });
       }
     }
     await this.provinceRepository.insert(provinces);
 
     const listProvinceFromDB = await this.provinceRepository.find();
-    for (const record of listRecords) {
+    for (const district of unitAdministratives) {
       for (const province of listProvinceFromDB) {
-        if (province.name === record['Tỉnh Thành Phố']) {
+        if (province.name === district['Tỉnh Thành Phố']) {
           const isExistedDistrict = districts.some(
-            (district) => district.name === record['Quận Huyện'],
+            (district) => district.name === district['Quận Huyện'],
           );
           if (!isExistedDistrict) {
             districts.push({
-              name: record['Quận Huyện'],
+              name: district['Quận Huyện'],
               province_id: province.id,
             });
           }
@@ -61,11 +61,11 @@ export class ExportUnitAdministrativeService {
     await this.districtRepository.insert(districts);
 
     const listDistrictFromDB = await this.districtRepository.find();
-    for (const record of listRecords) {
+    for (const ward of unitAdministratives) {
       for (const district of listDistrictFromDB) {
-        if (district.name === record['Quận Huyện']) {
+        if (district.name === ward['Quận Huyện']) {
           wards.push({
-            name: record['Phường Xã'] || 'Undefined data',
+            name: ward['Phường Xã'] || 'Undefined data',
             district_id: district.id,
           });
         }
