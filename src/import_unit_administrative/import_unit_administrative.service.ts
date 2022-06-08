@@ -7,7 +7,7 @@ import District from 'src/entities/district';
 import { Repository } from 'typeorm';
 import * as XLSX from 'xlsx';
 @Injectable()
-export class ExportUnitAdministrativeService {
+export class ImportUnitAdministrativeService {
   constructor(
     @InjectRepository(Ward)
     private readonly wardRepository: Repository<Ward>,
