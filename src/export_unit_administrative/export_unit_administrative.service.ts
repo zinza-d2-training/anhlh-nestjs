@@ -25,7 +25,7 @@ export class ExportUnitAdministrativeService {
     const provinces = [];
     const districts = [];
     const wards = [];
-    _cli.info(`export file`);
+    _cli.info(`import file`);
     const dataUnitAdministrative = XLSX.readFile(
       'src/utils/Danh sách cấp tỉnh kèm theo quận huyện, phường xã ___04_06_2022.xls',
     ).Sheets;
