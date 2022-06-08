@@ -1,11 +1,4 @@
-import {
-  IsNotEmpty,
-  IsEmail,
-  IsString,
-  IsOptional,
-  IsNumber,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
+import { IsNotEmpty, IsEmail, IsOptional, IsNumber } from 'class-validator';
 
 export class CreateUserDto {
   @IsOptional()
@@ -18,4 +11,7 @@ export class CreateUserDto {
 
   @IsNotEmpty({ message: 'Password không được để trống' })
   password: string;
+
+  created_at: Date;
+  updated_at: Date;
 }
