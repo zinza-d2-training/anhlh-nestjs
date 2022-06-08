@@ -6,6 +6,7 @@ import Province from 'src/entities/Province';
 import District from 'src/entities/District';
 import { Repository } from 'typeorm';
 import * as XLSX from 'xlsx';
+
 @Injectable()
 export class ExportUnitAdministrativeService {
   constructor(
@@ -16,11 +17,11 @@ export class ExportUnitAdministrativeService {
     @InjectRepository(Province)
     private readonly provinceRepository: Repository<Province>,
   ) {}
-  @Command('export', {
-    desc: 'Export data from excel to mysql server',
+  @Command('import', {
+    desc: 'import data from excel to mysql server',
     args: { name: { req: false } },
   })
-  async exportFile() {
+  async importFile() {
     const provinces = [];
     const districts = [];
     const wards = [];
@@ -51,7 +52,7 @@ export class ExportUnitAdministrativeService {
           if (!isExistedDistrict) {
             districts.push({
               name: record['Quận Huyện'],
-              provinces_id: province.id,
+              province_id: province.id,
             });
           }
         }
@@ -65,7 +66,7 @@ export class ExportUnitAdministrativeService {
         if (district.name === record['Quận Huyện']) {
           wards.push({
             name: record['Phường Xã'] || 'Undefined data',
-            districts_id: district.id,
+            district_id: district.id,
           });
         }
       }

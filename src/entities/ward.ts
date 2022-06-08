@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity('wards')
 class Ward {
   @PrimaryGeneratedColumn()
@@ -8,7 +9,7 @@ class Ward {
   public name: string;
 
   @Column()
-  public districts_id: number;
+  public district_id: number;
 
   @Column({
     type: 'timestamp',

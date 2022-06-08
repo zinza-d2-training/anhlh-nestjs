@@ -24,7 +24,7 @@ export class district1654520725109 implements MigrationInterface {
             length: '255',
           },
           {
-            name: 'provinces_id',
+            name: 'province_id',
             type: 'int',
           },
           {
@@ -46,7 +46,7 @@ export class district1654520725109 implements MigrationInterface {
     await queryRunner.createForeignKey(
       'districts',
       new TableForeignKey({
-        columnNames: ['provinces_id'],
+        columnNames: ['province_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'provinces',
       }),

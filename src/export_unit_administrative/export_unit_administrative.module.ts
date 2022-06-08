@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import Province from 'src/entities/Province';
 import District from 'src/entities/District';
 import Ward from 'src/entities/Ward';
+
 @Module({
   imports: [TypeOrmModule.forFeature([Province, District, Ward])],
   providers: [

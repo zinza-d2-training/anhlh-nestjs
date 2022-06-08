@@ -3,6 +3,7 @@ import User from '../entities/User';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateUserDto } from './update_user.dto';
+
 @Injectable()
 export class UserService {
   constructor(
