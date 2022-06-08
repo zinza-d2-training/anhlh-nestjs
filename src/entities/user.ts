@@ -10,6 +10,7 @@ class User {
 
   @Column()
   public password: string;
+
   @Column({
     type: 'timestamp',
   })

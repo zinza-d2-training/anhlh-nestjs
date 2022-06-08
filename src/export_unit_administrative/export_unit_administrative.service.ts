@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Command, CommandArguments, _cli } from '@squareboat/nest-console';
+import { Command, _cli } from '@squareboat/nest-console';
 import Ward from 'src/entities/Ward';
 import Province from 'src/entities/Province';
 import District from 'src/entities/District';

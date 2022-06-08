@@ -7,6 +7,7 @@ class Province {
 
   @Column()
   public name: string;
+
   @Column({
     type: 'timestamp',
   })
