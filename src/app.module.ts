@@ -5,9 +5,11 @@ import { TypeormModule } from './typeorm/typeorm.module';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { UserModule } from './user/user.module';
-// import User from './user/user.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { ConsoleModule } from '@squareboat/nest-console';
+import { ExportUnitAdministrativeModule } from './export_unit_administrative/export_unit_administrative.module';
+import { AuthController } from './auth/auth.controller';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,8 +18,10 @@ import { AuthModule } from './auth/auth.module';
     TypeormModule.forRoot(),
     UserModule,
     AuthModule,
+    ConsoleModule,
+    ExportUnitAdministrativeModule,
   ],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService],
+  controllers: [AppController, UserController, AuthController],
+  providers: [AppService, UserService, AuthController],
 })
 export class AppModule {}
