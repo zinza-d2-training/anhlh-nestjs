@@ -8,7 +8,7 @@ class District {
   public name: string;
 
   @Column()
-  public province_id: number;
+  public provinces_id: number;
 
   @Column({
     type: 'timestamp',

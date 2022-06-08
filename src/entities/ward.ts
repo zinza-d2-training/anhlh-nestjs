@@ -8,7 +8,7 @@ class Ward {
   public name: string;
 
   @Column()
-  public district_id: number;
+  public districts_id: number;
 
   @Column({
     type: 'timestamp',

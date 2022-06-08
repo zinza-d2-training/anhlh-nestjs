@@ -15,14 +15,9 @@ const config: TypeOrmModuleOptions = {
   autoLoadEntities: true,
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
   subscribers: [__dirname + '/subscribers/**/*{.ts,.js}'],
-  entities: [
-    __dirname + '/entities/**/*{.ts,.js}',
-    'dist/**/*.entity{.ts,.js}',
-  ],
+  entities: [__dirname + '/entities/**/*{.ts,.js}'],
   cli: {
     migrationsDir: 'src/typeorm/migrations',
-    subscribersDir: 'src/typeorm/subscribers',
-    entitiesDir: 'src/typeorm/entities',
   },
 };
 
