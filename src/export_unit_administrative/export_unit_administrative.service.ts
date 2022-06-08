@@ -20,11 +20,11 @@ export class ExportUnitAdministrativeService {
     desc: 'Export data from excel to mysql server',
     args: { name: { req: false } },
   })
-  async sayHello(args: CommandArguments) {
-    const listProvince = [];
-    const listDistrict = [];
-    const listWard = [];
-    _cli.info(`Hello ${args.name || 'world'}!`);
+  async exportFile() {
+    const provinces = [];
+    const districts = [];
+    const wards = [];
+    _cli.info(`export file`);
     const dataUnitAdministrative = XLSX.readFile(
       'src/utils/Danh sách cấp tỉnh kèm theo quận huyện, phường xã ___04_06_2022.xls',
     ).Sheets;
@@ -32,45 +32,45 @@ export class ExportUnitAdministrativeService {
       dataUnitAdministrative['Sheet1'],
     );
     for (const record of listRecords) {
-      const isExistListProvince: boolean = listProvince.some(
+      const isExistListProvince: boolean = provinces.some(
         (province) => province.name == record['Tỉnh Thành Phố'],
       );
       if (!isExistListProvince) {
-        listProvince.push({ name: record['Tỉnh Thành Phố'] });
+        provinces.push({ name: record['Tỉnh Thành Phố'] });
       }
     }
-    await this.provinceRepository.insert(listProvince);
+    await this.provinceRepository.insert(provinces);
 
     const listProvinceFromDB = await this.provinceRepository.find();
     for (const record of listRecords) {
       for (const province of listProvinceFromDB) {
         if (province.name === record['Tỉnh Thành Phố']) {
-          const isExistedDistrict = listDistrict.some(
+          const isExistedDistrict = districts.some(
             (district) => district.name === record['Quận Huyện'],
           );
           if (!isExistedDistrict) {
-            listDistrict.push({
+            districts.push({
               name: record['Quận Huyện'],
-              province_id: province.id,
+              provinces_id: province.id,
             });
           }
         }
       }
     }
-    await this.districtRepository.insert(listDistrict);
+    await this.districtRepository.insert(districts);
 
     const listDistrictFromDB = await this.districtRepository.find();
     for (const record of listRecords) {
       for (const district of listDistrictFromDB) {
         if (district.name === record['Quận Huyện']) {
-          listWard.push({
+          wards.push({
             name: record['Phường Xã'] || 'Undefined data',
-            district_id: district.id,
+            districts_id: district.id,
           });
         }
       }
     }
-    await this.wardRepository.insert(listWard);
+    await this.wardRepository.insert(wards);
     return;
   }
 }

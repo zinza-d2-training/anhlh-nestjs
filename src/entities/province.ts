@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-@Entity()
+@Entity('provinces')
 class Province {
   @PrimaryGeneratedColumn()
   public id: number;
