@@ -30,10 +30,7 @@ export class AuthController {
 
   @Post('logout')
   async logout() {
-    return {
-      status: '200',
-      message: 'Đăng xuất thành công',
-    };
+    this.authService.logout();
   }
 
   @UseGuards(JwtAuthGuard)

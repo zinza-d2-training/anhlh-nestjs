@@ -1,7 +1,7 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { User } from './regiter.interface';
+import { UserInterface } from '../user/type';
 export const GetUser = createParamDecorator(
-  (data: User, ctx: ExecutionContext) => {
+  (data: UserInterface, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
     const user = request.user;
 

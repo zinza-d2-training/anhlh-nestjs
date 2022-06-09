@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import * as bcrypt from 'bcrypt';
-import { User as UserInterface } from './regiter.interface';
+import bcrypt from 'bcrypt';
+import { UserInterface } from '../user/type';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { Repository } from 'typeorm';
@@ -49,8 +49,12 @@ export class AuthService {
   }
 
   logout() {
-    return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
+    return {
+      status: '200',
+      message: 'Đăng xuất thành công',
+    };
   }
+
   async getProfile(user: UserInterface) {
     const { id } = user;
     return this.userRepository.findOne({ id });
