@@ -1,11 +1,13 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-@Entity()
+
+@Entity('provinces')
 class Province {
   @PrimaryGeneratedColumn()
   public id: number;
 
   @Column()
   public name: string;
+
   @Column({
     type: 'timestamp',
   })

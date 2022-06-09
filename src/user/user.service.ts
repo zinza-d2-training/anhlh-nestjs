@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import User from '../entities/user';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import User from '../entities/User';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateUserDto } from './update_user.dto';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -14,6 +15,9 @@ export class UserService {
   }
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ id });
+
+    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+
     Object.assign(user, updateUserDto);
     return await this.userRepository.save(user);
   }

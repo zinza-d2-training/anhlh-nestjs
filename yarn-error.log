@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js i
+  C:\Program Files\nodejs\node.exe C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add bryct
 
 PATH: 
   C:\Users\Admin\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Admin\bin;C:\Python310\Scripts;C:\Python310;C:\Program Files\Common Files\Siemens\Automation\Simatic OAM\bin;C:\Python27;C:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\Program Files\PuTTY;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Program Files\MongoDB\Server\4.4\bin;C:\Users\Admin\Downloads\mongodb-database-tools-windows-x86_64-100.5.2\mongodb-database-tools-windows-x86_64-100.5.2\bin;C:\Users\Admin\AppData\Local\Microsoft\WindowsApps;C:\Users\Admin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Admin\AppData\Local\GitHubDesktop\bin;C:\Program Files\heroku\bin;C:\Users\Admin\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,104 +14,20 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: D:\ANHLH-NEST\project-test\package.json: Unexpected token < in JSON at position 2
-      at JSON.parse (<anonymous>)
-      at C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+  Error: https://registry.npmjs.com/bryct: Not found
+      at Request.params.callback [as _callback] (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66138:18)
+      at Request.self.callback (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140883:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141855:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (C:\Users\Admin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141777:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
-  <<<<<<< HEAD
-    "name": "project-test",
-    "version": "0.0.1",
-    "description": "",
-    "author": "",
-    "private": true,
-    "license": "UNLICENSED",
-    "scripts": {
-      "prebuild": "rimraf dist",
-      "build": "nest build",
-      "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-      "start": "nest start",
-      "start:dev": "nest start --watch",
-      "start:debug": "nest start --debug --watch",
-      "start:prod": "node dist/main",
-      "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-      "test": "jest",
-      "test:watch": "jest --watch",
-      "test:cov": "jest --coverage",
-      "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-      "test:e2e": "jest --config ./test/jest-e2e.json",
-      "migration": "yarn typeorm migration:run",
-      "migration:create": "yarn typeorm migration:create -n",
-      "migration:revert": "yarn typeorm migration:revert",
-      "typeorm": "typeorm-ts-node-commonjs"
-    },
-    "dependencies": {
-      "@nestjs/common": "^8.0.0",
-      "@nestjs/config": "^2.1.0",
-      "@nestjs/core": "^8.0.0",
-      "@nestjs/mapped-types": "^1.0.1",
-      "@nestjs/passport": "^8.2.1",
-      "@nestjs/platform-express": "^8.0.0",
-      "@nestjs/typeorm": "^8.1.0",
-      "@types/passport-local": "^1.0.34",
-      "class-transformer": "^0.5.1",
-      "class-validator": "^0.13.2",
-      "global": "^4.4.0",
-      "mysql": "^2.18.1",
-      "mysql2": "^2.3.3",
-      "passport": "^0.6.0",
-      "passport-local": "^1.0.0",
-      "pg": "^8.7.3",
-      "reflect-metadata": "^0.1.13",
-      "rimraf": "^3.0.2",
-      "rxjs": "^7.2.0",
-      "typeorm": "^0.3.6"
-    },
-    "devDependencies": {
-      "@nestjs/cli": "^8.0.0",
-      "@nestjs/schematics": "^8.0.0",
-      "@nestjs/testing": "^8.0.0",
-      "@types/express": "^4.17.13",
-      "@types/jest": "27.5.0",
-      "@types/node": "^16.0.0",
-      "@types/supertest": "^2.0.11",
-      "@typescript-eslint/eslint-plugin": "^5.0.0",
-      "@typescript-eslint/parser": "^5.0.0",
-      "eslint": "^8.0.1",
-      "eslint-config-prettier": "^8.3.0",
-      "eslint-plugin-prettier": "^4.0.0",
-      "jest": "28.0.3",
-      "prettier": "^2.3.2",
-      "source-map-support": "^0.5.20",
-      "supertest": "^6.1.3",
-      "ts-jest": "28.0.1",
-      "ts-loader": "^9.2.3",
-      "ts-node": "^10.0.0",
-      "tsconfig-paths": "4.0.0",
-      "typescript": "^4.3.5"
-    },
-    "jest": {
-      "moduleFileExtensions": [
-        "js",
-        "json",
-        "ts"
-      ],
-      "rootDir": "src",
-      "testRegex": ".*\\.spec\\.ts$",
-      "transform": {
-        "^.+\\.(t|j)s$": "ts-jest"
-      },
-      "collectCoverageFrom": [
-        "**/*.(t|j)s"
-      ],
-      "coverageDirectory": "../coverage",
-      "testEnvironment": "node"
-    }
-  =======
      "name": "project-test",
      "version": "0.0.1",
      "description": "",
@@ -141,10 +57,13 @@ npm manifest:
         "@nestjs/common": "^8.4.6",
         "@nestjs/config": "^2.1.0",
         "@nestjs/core": "^8.0.0",
+        "@nestjs/jwt": "^8.0.1",
         "@nestjs/mapped-types": "^1.0.1",
+        "@nestjs/passport": "^8.2.1",
         "@nestjs/platform-express": "^8.0.0",
         "@nestjs/typeorm": "^8.0.3",
         "@squareboat/nest-console": "^0.1.0",
+        "@types/passport-local": "^1.0.34",
         "class-transformer": "^0.5.1",
         "class-validator": "^0.13.2",
         "dotenv": "^16.0.1",
@@ -152,6 +71,9 @@ npm manifest:
         "global": "^4.4.0",
         "mysql2": "^2.3.3",
         "nest-console": "^6.10.4",
+        "passport": "^0.6.0",
+        "passport-jwt": "^4.0.0",
+        "passport-local": "^1.0.0",
         "reflect-metadata": "^0.1.13",
         "rimraf": "^3.0.2",
         "rxjs": "^7.2.0",
@@ -198,7 +120,6 @@ npm manifest:
         "coverageDirectory": "../coverage",
         "testEnvironment": "node"
      }
-  >>>>>>> import_administrative_units
   }
 
 yarn manifest: 
@@ -936,6 +857,14 @@ Lockfile:
       tslib "2.4.0"
       uuid "8.3.2"
   
+  "@nestjs/jwt@^8.0.1":
+    version "8.0.1"
+    resolved "https://registry.yarnpkg.com/@nestjs/jwt/-/jwt-8.0.1.tgz#e00f6810705a75d5680903241f4e07272e59e6d5"
+    integrity sha512-9WGfgngX8aclC/MC+CH35Ooo4iPVKc+7xLXaBV6o4ty8g2uZdPomry7cSdK/e6Lv623O/84WapThnPoAtW/jvA==
+    dependencies:
+      "@types/jsonwebtoken" "8.5.8"
+      jsonwebtoken "8.5.1"
+  
   "@nestjs/mapped-types@^1.0.1":
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-1.0.1.tgz#78b62041c7a407db4a90eb140567321602bed18e"
@@ -1211,6 +1140,13 @@ Lockfile:
     version "0.0.29"
     resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
     integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+  
+  "@types/jsonwebtoken@8.5.8":
+    version "8.5.8"
+    resolved "https://registry.yarnpkg.com/@types/jsonwebtoken/-/jsonwebtoken-8.5.8.tgz#01b39711eb844777b7af1d1f2b4cf22fda1c0c44"
+    integrity sha512-zm6xBQpFDIDM6o9r6HSgDeIcLy82TKWctCXEPbJJcXb5AKmi5BNNdLXneixK4lplX3PqIVcwLBCGE/kAGnlD4A==
+    dependencies:
+      "@types/node" "*"
   
   "@types/lodash@4.14.149":
     version "4.14.149"
@@ -1976,6 +1912,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/buffer-crc32/-/buffer-crc32-0.2.13.tgz#0d333e3f00eac50aa1454abd30ef8c2a5d9a7242"
     integrity sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==
   
+  buffer-equal-constant-time@1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/buffer-equal-constant-time/-/buffer-equal-constant-time-1.0.1.tgz#f8e71132f7ffe6e01a5c9697a4c6f3e48d5cc819"
+    integrity sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==
+  
   buffer-from@^1.0.0:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.2.tgz#2b146a6fd72e80b4f55d255f35ed59a3a9a41bd5"
@@ -2556,6 +2497,13 @@ Lockfile:
     integrity sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==
     dependencies:
       readable-stream "^2.0.2"
+  
+  ecdsa-sig-formatter@1.0.11:
+    version "1.0.11"
+    resolved "https://registry.yarnpkg.com/ecdsa-sig-formatter/-/ecdsa-sig-formatter-1.0.11.tgz#ae0f0fa2d85045ef14a817daa3ce9acd0489e5bf"
+    integrity sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==
+    dependencies:
+      safe-buffer "^5.0.1"
   
   ee-first@1.1.1:
     version "1.1.1"
@@ -4058,6 +4006,22 @@ Lockfile:
     optionalDependencies:
       graceful-fs "^4.1.6"
   
+  jsonwebtoken@8.5.1, jsonwebtoken@^8.2.0:
+    version "8.5.1"
+    resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
+    integrity sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==
+    dependencies:
+      jws "^3.2.2"
+      lodash.includes "^4.3.0"
+      lodash.isboolean "^3.0.3"
+      lodash.isinteger "^4.0.4"
+      lodash.isnumber "^3.0.3"
+      lodash.isplainobject "^4.0.6"
+      lodash.isstring "^4.0.1"
+      lodash.once "^4.0.0"
+      ms "^2.1.1"
+      semver "^5.6.0"
+  
   jszip@^3.5.0:
     version "3.10.0"
     resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.10.0.tgz#faf3db2b4b8515425e34effcdbb086750a346061"
@@ -4067,6 +4031,23 @@ Lockfile:
       pako "~1.0.2"
       readable-stream "~2.3.6"
       setimmediate "^1.0.5"
+  
+  jwa@^1.4.1:
+    version "1.4.1"
+    resolved "https://registry.yarnpkg.com/jwa/-/jwa-1.4.1.tgz#743c32985cb9e98655530d53641b66c8645b039a"
+    integrity sha512-qiLX/xhEEFKUAJ6FiBMbes3w9ATzyk5W7Hvzpa/SLYdxNtng+gcurvrI7TbACjIXlsJyr05/S1oUhZrc63evQA==
+    dependencies:
+      buffer-equal-constant-time "1.0.1"
+      ecdsa-sig-formatter "1.0.11"
+      safe-buffer "^5.0.1"
+  
+  jws@^3.2.2:
+    version "3.2.2"
+    resolved "https://registry.yarnpkg.com/jws/-/jws-3.2.2.tgz#001099f3639468c9414000e99995fa52fb478304"
+    integrity sha512-YHlZCB6lMTllWDtSPHz/ZXTsi8S00usEV6v1tjq8tOUZzw7DpSDWVXjXDre6ed1w/pd495ODpHZYSdkRTsa0HA==
+    dependencies:
+      jwa "^1.4.1"
+      safe-buffer "^5.0.1"
   
   kleur@^3.0.3:
     version "3.0.3"
@@ -4159,6 +4140,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.groupby/-/lodash.groupby-4.6.0.tgz#0b08a1dcf68397c397855c3239783832df7403d1"
     integrity sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==
   
+  lodash.includes@^4.3.0:
+    version "4.3.0"
+    resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
+    integrity sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==
+  
   lodash.isboolean@^3.0.3:
     version "3.0.3"
     resolved "https://registry.yarnpkg.com/lodash.isboolean/-/lodash.isboolean-3.0.3.tgz#6c2e171db2a257cd96802fd43b01b20d5f5870f6"
@@ -4174,15 +4160,30 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lodash.isfunction/-/lodash.isfunction-3.0.9.tgz#06de25df4db327ac931981d1bdb067e5af68d051"
     integrity sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==
   
+  lodash.isinteger@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/lodash.isinteger/-/lodash.isinteger-4.0.4.tgz#619c0af3d03f8b04c31f5882840b77b11cd68343"
+    integrity sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==
+  
   lodash.isnil@^4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
     integrity sha512-up2Mzq3545mwVnMhTDMdfoG1OurpA/s5t88JmQX809eH3C8491iu2sfKhTfhQtKY78oPNhiaHJUpT/dUDAAtng==
   
+  lodash.isnumber@^3.0.3:
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/lodash.isnumber/-/lodash.isnumber-3.0.3.tgz#3ce76810c5928d03352301ac287317f11c0b1ffc"
+    integrity sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==
+  
   lodash.isplainobject@^4.0.6:
     version "4.0.6"
     resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
     integrity sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==
+  
+  lodash.isstring@^4.0.1:
+    version "4.0.1"
+    resolved "https://registry.yarnpkg.com/lodash.isstring/-/lodash.isstring-4.0.1.tgz#d527dfb5456eca7cc9bb95d5daeaf88ba54a5451"
+    integrity sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==
   
   lodash.isundefined@^3.0.1:
     version "3.0.1"
@@ -4198,6 +4199,11 @@ Lockfile:
     version "4.6.2"
     resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
     integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+  
+  lodash.once@^4.0.0:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
+    integrity sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==
   
   lodash.union@^4.6.0:
     version "4.6.0"
@@ -4674,6 +4680,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
     integrity sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==
   
+  passport-jwt@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/passport-jwt/-/passport-jwt-4.0.0.tgz#7f0be7ba942e28b9f5d22c2ebbb8ce96ef7cf065"
+    integrity sha512-BwC0n2GP/1hMVjR4QpnvqA61TxenUMlmfNjYNgK0ZAs0HK4SOQkHcSv4L328blNTLtHq7DbmvyNJiH+bn6C5Mg==
+    dependencies:
+      jsonwebtoken "^8.2.0"
+      passport-strategy "^1.0.0"
+  
   passport-local@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/passport-local/-/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
@@ -4681,7 +4695,7 @@ Lockfile:
     dependencies:
       passport-strategy "1.x.x"
   
-  passport-strategy@1.x.x:
+  passport-strategy@1.x.x, passport-strategy@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
     integrity sha512-CB97UUvDKJde2V0KDWWB3lyf6PC3FaZP7YxZ2G8OAtn9p4HI9j9JLP9qjOGZFvyl8uwNT8qM+hGnz/n16NI7oA==
@@ -4730,65 +4744,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
     integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
   
-  <<<<<<< HEAD
   pause@0.0.1:
     version "0.0.1"
     resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
     integrity sha512-KG8UEiEVkR3wGEb4m5yZkVCzigAD+cVEJck2CzYZO37ZGJfctvVptVO192MwrtPhzONn6go8ylnOdMhKqi4nfg==
   
-  pg-connection-string@^2.5.0:
-    version "2.5.0"
-    resolved "https://registry.yarnpkg.com/pg-connection-string/-/pg-connection-string-2.5.0.tgz#538cadd0f7e603fc09a12590f3b8a452c2c0cf34"
-    integrity sha512-r5o/V/ORTA6TmUnyWZR9nCj1klXCO2CEKNRlVuJptZe85QuhFayC7WeMic7ndayT5IRIR0S0xFxFi2ousartlQ==
-  
-  pg-int8@1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/pg-int8/-/pg-int8-1.0.1.tgz#943bd463bf5b71b4170115f80f8efc9a0c0eb78c"
-    integrity sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==
-  
-  pg-pool@^3.5.1:
-    version "3.5.1"
-    resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-3.5.1.tgz#f499ce76f9bf5097488b3b83b19861f28e4ed905"
-    integrity sha512-6iCR0wVrro6OOHFsyavV+i6KYL4lVNyYAB9RD18w66xSzN+d8b66HiwuP30Gp1SH5O9T82fckkzsRjlrhD0ioQ==
-  
-  pg-protocol@^1.5.0:
-    version "1.5.0"
-    resolved "https://registry.yarnpkg.com/pg-protocol/-/pg-protocol-1.5.0.tgz#b5dd452257314565e2d54ab3c132adc46565a6a0"
-    integrity sha512-muRttij7H8TqRNu/DxrAJQITO4Ac7RmX3Klyr/9mJEOBeIpgnF8f9jAfRz5d3XwQZl5qBjF9gLsUtMPJE0vezQ==
-  
-  pg-types@^2.1.0:
-    version "2.2.0"
-    resolved "https://registry.yarnpkg.com/pg-types/-/pg-types-2.2.0.tgz#2d0250d636454f7cfa3b6ae0382fdfa8063254a3"
-    integrity sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==
-    dependencies:
-      pg-int8 "1.0.1"
-      postgres-array "~2.0.0"
-      postgres-bytea "~1.0.0"
-      postgres-date "~1.0.4"
-      postgres-interval "^1.1.0"
-  
-  pg@^8.7.3:
-    version "8.7.3"
-    resolved "https://registry.yarnpkg.com/pg/-/pg-8.7.3.tgz#8a5bdd664ca4fda4db7997ec634c6e5455b27c44"
-    integrity sha512-HPmH4GH4H3AOprDJOazoIcpI49XFsHCe8xlrjHkWiapdbHK+HLtbm/GQzXYAZwmPju/kzKhjaSfMACG+8cgJcw==
-    dependencies:
-      buffer-writer "2.0.0"
-      packet-reader "1.0.0"
-      pg-connection-string "^2.5.0"
-      pg-pool "^3.5.1"
-      pg-protocol "^1.5.0"
-      pg-types "^2.1.0"
-      pgpass "1.x"
-  
-  pgpass@1.x:
-    version "1.0.5"
-    resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-1.0.5.tgz#9b873e4a564bb10fa7a7dbd55312728d422a223d"
-    integrity sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==
-    dependencies:
-      split2 "^4.1.0"
-  
-  =======
-  >>>>>>> import_administrative_units
   picocolors@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
@@ -5164,6 +5124,11 @@ Lockfile:
     integrity sha512-QlYTucUYOews+WeEujDoEGziz4K6c47V/Bd+LjSSYcA94p+DmINdf7ncaUinThfvZyu13lN9OY1XDxt8C0Tw0g==
     dependencies:
       lru-cache "^6.0.0"
+  
+  semver@^5.6.0:
+    version "5.7.1"
+    resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.1.tgz#a954f931aeba508d307bbf069eff0c01c96116f7"
+    integrity sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==
   
   semver@^6.0.0, semver@^6.3.0:
     version "6.3.0"

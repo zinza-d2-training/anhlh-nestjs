@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 @Entity()
 class User {
   @PrimaryGeneratedColumn()
@@ -9,6 +10,7 @@ class User {
 
   @Column()
   public password: string;
+
   @Column({
     type: 'timestamp',
   })
