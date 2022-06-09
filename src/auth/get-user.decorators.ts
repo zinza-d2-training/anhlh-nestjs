@@ -5,6 +5,6 @@ export const GetUser = createParamDecorator(
     const request = ctx.switchToHttp().getRequest();
     const user = request.user;
 
-    return data ? user : 'ko có user';
+    return data ? user : 'User does not exist';
   },
 );

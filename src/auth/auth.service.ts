@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { UserInterface } from '../user/type';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
@@ -18,8 +18,8 @@ export class AuthService {
     const user = await this.userRepository.findOne({ email });
     const comparePassword = await bcrypt.compare(pass, user.password);
     if (comparePassword) {
-      const { password, ...email_and_id } = user;
-      return email_and_id;
+      const { password, ...emailAndId } = user;
+      return emailAndId;
     }
     return null;
   }
@@ -29,7 +29,7 @@ export class AuthService {
     const hasUser = await this.userRepository.findOne({ email });
     const saltRounds = 10;
     if (hasUser) {
-      return 'user da ton tai';
+      return 'user already exists';
     }
 
     const hashPass = await bcrypt.hashSync(password, saltRounds);
@@ -37,7 +37,6 @@ export class AuthService {
       email,
       password: hashPass,
     });
-    await this.userRepository.save(user);
     return user;
   }
 
@@ -51,12 +50,12 @@ export class AuthService {
   logout() {
     return {
       status: '200',
-      message: 'Đăng xuất thành công',
+      message: 'Logout successful',
     };
   }
 
   async getProfile(user: UserInterface) {
     const { id } = user;
-    return this.userRepository.findOne({ id });
+    return await this.userRepository.findOne({ id });
   }
 }
