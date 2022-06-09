@@ -5,6 +5,7 @@ import { User as UserInterface } from './regiter.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { Repository } from 'typeorm';
+import { RegisterDto } from './register.dto';
 @Injectable()
 export class AuthService {
   constructor(
@@ -23,7 +24,7 @@ export class AuthService {
     return null;
   }
 
-  async registerUser(body: UserInterface) {
+  async registerUser(body: RegisterDto) {
     const { email, password } = body;
     const hasUser = await this.userRepository.findOne({ email });
     const saltRounds = 10;
