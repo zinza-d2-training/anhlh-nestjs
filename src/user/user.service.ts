@@ -10,21 +10,22 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
+
   async findOne(email: string) {
     return await this.userRepository.findOne({ email });
   }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ id });
-
-    throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
-
     Object.assign(user, updateUserDto);
     return await this.userRepository.save(user);
   }
+
   async createUser(user: User) {
     const newUser = this.userRepository.create(user);
     return await this.userRepository.save(newUser);
   }
+
   async remove(id: number) {
     const user = await this.userRepository.findOne({ id });
     return await this.userRepository.remove(user);

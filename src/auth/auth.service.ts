@@ -46,4 +46,8 @@ export class AuthService {
   logout() {
     return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
   }
+  async getProfile(user: UserInterface) {
+    const { id } = user;
+    return this.userRepository.findOne({ id });
+  }
 }

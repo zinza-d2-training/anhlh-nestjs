@@ -11,10 +11,12 @@ export class UserController {
   remove(@Param('id') id: string) {
     return this.UserService.remove(+id);
   }
+
   @Patch('/:id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return await this.UserService.update(+id, updateUserDto);
   }
+
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     const response = await this.UserService.createUser(createUserDto);
