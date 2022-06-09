@@ -1,17 +1,10 @@
-import { IsNotEmpty, IsEmail, IsOptional, IsNumber } from 'class-validator';
+import { IsNotEmpty, IsEmail } from 'class-validator';
 
 export class RegisterDto {
-  @IsOptional()
-  @IsNumber()
-  id: number;
-
   @IsEmail({ message: 'Email không phừ hợp' })
   @IsNotEmpty({ message: 'Email không được để trống' })
   email: string;
 
   @IsNotEmpty({ message: 'Password không được để trống' })
   password: string;
-
-  created_at?: Date;
-  updated_at?: Date;
 }
