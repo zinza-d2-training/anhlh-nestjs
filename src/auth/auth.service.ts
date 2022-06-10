@@ -60,9 +60,7 @@ export class AuthService {
   }
 
   async getProfile(id: number) {
-    console.log(id);
     const profileUser = await this.userRepository.findOne({ id });
-    console.log(profileUser);
     return profileUser;
   }
 }
