@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UserInterface } from '../user/type';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { Repository } from 'typeorm';
-import { RegisterDto } from './register.dto';
+import { UserRegisterDto } from './user-register.dto';
+import { UserLoginInterface } from './user-login.interface';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -16,6 +18,9 @@ export class AuthService {
 
   async validateUser(email: string, pass: string) {
     const user = await this.userRepository.findOne({ email });
+    if (!user) {
+      throw new UnauthorizedException('User does not exist', '401');
+    }
     const comparePassword = await bcrypt.compare(pass, user.password);
     if (comparePassword) {
       const { password, ...emailAndId } = user;
@@ -24,7 +29,7 @@ export class AuthService {
     return null;
   }
 
-  async registerUser(body: RegisterDto) {
+  async registerUser(body: UserRegisterDto) {
     const { email, password } = body;
     const hasUser = await this.userRepository.findOne({ email });
     const saltRounds = 10;
@@ -40,7 +45,7 @@ export class AuthService {
     return user;
   }
 
-  async login(user: UserInterface) {
+  async login(user: UserLoginInterface) {
     const payload = { email: user.email, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
@@ -56,6 +61,7 @@ export class AuthService {
 
   async getProfile(user: UserInterface) {
     const { id } = user;
-    return await this.userRepository.findOne({ id });
+    const profileUser = await this.userRepository.findOne({ id });
+    return profileUser;
   }
 }

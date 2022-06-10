@@ -23,8 +23,7 @@ export class UserService {
   }
 
   async createUser(body: CreateUserDto) {
-    const newUser = this.userRepository.create(body);
-    return await this.userRepository.save(newUser);
+    return this.userRepository.create(body);
   }
 
   async remove(id: number) {
