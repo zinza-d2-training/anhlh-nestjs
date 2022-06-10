@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('users')
 class User {
   @PrimaryGeneratedColumn()
   public id: number;
@@ -11,10 +11,29 @@ class User {
   @Column()
   public password: string;
 
+  @Column()
+  public ward: string;
+
+  @Column()
+  public district: string;
+
+  @Column()
+  public province: string;
+
+  @Column()
+  public role: string;
+
+  @Column()
+  public gender: string;
+
+  @Column()
+  identity_card_number: number;
+
   @Column({
     type: 'timestamp',
   })
   public created_at: Date;
+
   @Column({
     type: 'timestamp',
   })

@@ -11,6 +11,10 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @UseGuards(AuthGuard('local'))
+  @Get('a')
+  logi() {
+    return 'ok';
+  }
   @Post('login')
   async login(@GetUser() user: UserLoginInterface) {
     return this.authService.login(user);
