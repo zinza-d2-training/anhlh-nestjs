@@ -59,9 +59,10 @@ export class AuthService {
     };
   }
 
-  async getProfile(user: UserInterface) {
-    const { id } = user;
+  async getProfile(id: number) {
+    console.log(id);
     const profileUser = await this.userRepository.findOne({ id });
+    console.log(profileUser);
     return profileUser;
   }
 }
