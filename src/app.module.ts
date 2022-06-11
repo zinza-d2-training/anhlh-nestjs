@@ -8,7 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ConsoleModule } from '@squareboat/nest-console';
 import { ImportUnitAdministrativeModule } from './import_unit_administrative/import_unit_administrative.module';
-import { AuthController } from './auth/auth.controller';
+import { UserRegisterModule } from './user_registration/user-register.module';
 
 @Module({
   imports: [
@@ -20,6 +20,7 @@ import { AuthController } from './auth/auth.controller';
     AuthModule,
     ConsoleModule,
     ImportUnitAdministrativeModule,
+    UserRegisterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
