@@ -12,7 +12,6 @@ export class UserRegisterController {
   }
   @Patch('update/:id')
   async update(@Param('id') id: number, @Body() body: UpdateUserDto) {
-    console.log(id);
     return this.userRegisterService.updateUser(id, body);
   }
 }

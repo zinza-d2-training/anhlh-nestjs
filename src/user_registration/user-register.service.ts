@@ -78,7 +78,6 @@ export class UserRegisterService {
   }
   async updateUser(id: number, body: UpdateUserDto) {
     const user = await this.userRepository.findOne({ where: { id } });
-    console.log(user, body);
     Object.assign(user, body);
     return await this.userRepository.save(user);
   }
