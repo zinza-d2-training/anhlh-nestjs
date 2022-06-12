@@ -34,7 +34,7 @@ export class UserRegisterService {
       fullname,
     } = body;
     const hasUser = await this.userRepository.findOne({ email });
-    const saltRounds = 10;
+    const saltRounds = 4;
     if (hasUser) {
       return 'user already exists';
     }
@@ -62,7 +62,8 @@ export class UserRegisterService {
     if (!hasWard) {
       return new HttpException('This Ward is not available', 404);
     }
-    const hashPass = await bcrypt.hashSync(password, saltRounds);
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hashPass = bcrypt.hashSync(password, salt);
     const user = await this.userRepository.save({
       email,
       password: hashPass,
@@ -78,7 +79,6 @@ export class UserRegisterService {
   }
   async updateUser(id: number, body: UpdateUserDto) {
     const user = await this.userRepository.findOne({ where: { id } });
-    console.log(user, body);
     Object.assign(user, body);
     return await this.userRepository.save(user);
   }

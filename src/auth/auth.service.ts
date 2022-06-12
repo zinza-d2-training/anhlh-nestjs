@@ -15,11 +15,11 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string) {
-    const user = await this.userRepository.findOne({ email });
+    const user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
-      throw new UnauthorizedException('User does not exist', '401');
+      throw new UnauthorizedException('User does not exist', '404');
     }
-    const comparePassword = await bcrypt.compare(pass, user.password);
+    const comparePassword = bcrypt.compareSync(pass, user.password);
     if (comparePassword) {
       const { password, ...emailAndId } = user;
       return emailAndId;
