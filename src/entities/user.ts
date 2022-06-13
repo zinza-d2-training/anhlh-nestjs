@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import Ward from './Ward';
+import Ward from './ward';
 
 @Entity('users')
 class User {
@@ -33,9 +33,8 @@ class User {
   @Column({ unique: true })
   identity_card_number: number;
 
-  // @OneToOne(() => Ward)
-  // @JoinColumn({ name: 'ward_id' })
-  // ward: Ward;
+  @OneToOne(() => Ward)
+  ward: Ward;
 
   @Column({
     type: 'timestamp',

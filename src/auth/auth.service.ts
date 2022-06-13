@@ -52,7 +52,13 @@ export class AuthService {
     const { email, password, ward_id, identity_card_number, gender, fullname } =
       body;
     const hasUser = await this.userRepository.findOne({ email });
+    const hasIdentityCardNumber = await this.userRepository.findOne({
+      identity_card_number,
+    });
     const saltRounds = 10;
+    if (hasIdentityCardNumber) {
+      return 'Identity Card Number already exists';
+    }
     if (hasUser) {
       return 'user already exists';
     }

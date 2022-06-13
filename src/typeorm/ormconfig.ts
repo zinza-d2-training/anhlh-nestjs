@@ -12,9 +12,12 @@ const config: TypeOrmModuleOptions = {
   synchronize: false,
   migrationsRun: true,
   logger: 'advanced-console',
+  autoLoadEntities: true,
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  subscribers: [__dirname + '/subscribers/**/*{.ts,.js}'],
-  entities: [__dirname + '/entities/**/*{.ts,.js}'],
+  entities: [
+    __dirname + '/entities/**/*{.ts,.js}',
+    __dirname + './build/src/entity/*.js',
+  ],
   cli: {
     migrationsDir: 'src/typeorm/migrations',
   },

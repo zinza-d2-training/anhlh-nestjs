@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import Province from './province';
+import Ward from './ward';
 
 @Entity('districts')
 class District {
@@ -10,6 +19,13 @@ class District {
 
   @Column()
   public province_id: number;
+
+  @ManyToOne(() => Province, (province) => province.district)
+  @JoinColumn({ name: 'province_id' })
+  province: Province;
+
+  @OneToMany(() => Ward, (ward) => ward.district)
+  ward: Ward[];
 
   @Column({
     type: 'timestamp',
