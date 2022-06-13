@@ -49,53 +49,19 @@ export class AuthService {
   }
 
   async registerUser(body: UserRegisterDto) {
-    const {
-      email,
-      password,
-      ward,
-      district,
-      province,
-      identity_card_number,
-      gender,
-      fullname,
-    } = body;
+    const { email, password, ward_id, identity_card_number, gender, fullname } =
+      body;
     const hasUser = await this.userRepository.findOne({ email });
     const saltRounds = 10;
     if (hasUser) {
       return 'user already exists';
-    }
-    const hasProvince = await this.provinceRepository.findOne({
-      where: { name: province },
-    });
-    if (!hasProvince) {
-      return new HttpException('This province is not available', 404);
-    }
-    const hasDistrict = await this.districtRepository
-      .createQueryBuilder('district')
-      .where('district.province_id= :provinceId', {
-        provinceId: hasProvince.id,
-      })
-      .andWhere('district.name = :name', { name: district })
-      .getOne();
-    if (!hasDistrict) {
-      return new HttpException('This District is not available', 404);
-    }
-    const hasWard = await this.wardRepository
-      .createQueryBuilder('ward')
-      .where('ward.district_id= :districtId', { districtId: hasDistrict.id })
-      .andWhere('ward.name = :name', { name: ward })
-      .getOne();
-    if (!hasWard) {
-      return new HttpException('This Ward is not available', 404);
     }
     const hashPass = bcrypt.hashSync(password, saltRounds);
     const user = await this.userRepository.save({
       email,
       password: hashPass,
       fullname,
-      province,
-      district,
-      ward,
+      ward_id,
       gender,
       identity_card_number,
       role: 'user',

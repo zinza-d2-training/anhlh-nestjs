@@ -2,7 +2,6 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('wards')
 class Ward {
-  [x: string]: any;
   @PrimaryGeneratedColumn()
   public id: number;
 

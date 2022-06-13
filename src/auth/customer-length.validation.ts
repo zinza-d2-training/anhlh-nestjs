@@ -11,10 +11,6 @@ export class Length implements ValidatorConstraintInterface {
   validate(text: string, args: ValidationArguments) {
     return text.length == 9 || text.length == 12;
   }
-
-  defaultMessage(args: ValidationArguments) {
-    return 'Password not allow space';
-  }
 }
 
 export function CheckLength(validationOptions?: ValidationOptions) {

@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, MinLength, Length } from 'class-validator';
+import { IsNotEmpty, IsEmail, MinLength, Length, Min } from 'class-validator';
 import { NotSpace } from './customer-space.validation';
 import { CheckLength } from './customer-length.validation';
 export class UserRegisterDto {
@@ -14,14 +14,9 @@ export class UserRegisterDto {
   @IsNotEmpty({ message: 'Fullname cannot be left blank' })
   fullname: string;
 
-  @IsNotEmpty({ message: 'Ward cannot be left blank' })
-  ward: string;
-
-  @IsNotEmpty({ message: 'District cannot be left blank' })
-  district: string;
-
-  @IsNotEmpty({ message: 'Province cannot be left blank' })
-  province: string;
+  @Min(1)
+  @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
+  ward_id: number;
 
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;

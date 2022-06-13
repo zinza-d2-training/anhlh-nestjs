@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import Ward from './Ward';
 
 @Entity('users')
 class User {
@@ -15,13 +22,7 @@ class User {
   public password: string;
 
   @Column()
-  public ward: string;
-
-  @Column()
-  public district: string;
-
-  @Column()
-  public province: string;
+  public ward_id: number;
 
   @Column({ default: 'user' })
   public role: string;
@@ -29,8 +30,12 @@ class User {
   @Column()
   public gender: string;
 
-  @Column()
+  @Column({ unique: true })
   identity_card_number: number;
+
+  // @OneToOne(() => Ward)
+  // @JoinColumn({ name: 'ward_id' })
+  // ward: Ward;
 
   @Column({
     type: 'timestamp',

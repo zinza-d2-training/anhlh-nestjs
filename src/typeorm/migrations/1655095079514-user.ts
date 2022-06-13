@@ -1,6 +1,11 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import {
+  MigrationInterface,
+  QueryRunner,
+  Table,
+  TableForeignKey,
+} from 'typeorm';
 
-export class users1654846311193 implements MigrationInterface {
+export class users1655095079514 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
@@ -24,27 +29,17 @@ export class users1654846311193 implements MigrationInterface {
             length: '255',
           },
           {
+            name: 'ward_id',
+            type: 'integer',
+          },
+          {
             name: 'password',
             type: 'varchar',
             length: '45',
           },
           {
-            name: 'ward',
-            type: 'varchar',
-            length: '45',
-          },
-          {
-            name: 'district',
-            type: 'varchar',
-            length: '45',
-          },
-          {
-            name: 'province',
-            type: 'varchar',
-            length: '45',
-          },
-          {
             name: 'identity_card_number',
+            isUnique: true,
             type: 'integer',
             length: '45',
           },
@@ -73,6 +68,14 @@ export class users1654846311193 implements MigrationInterface {
         ],
       }),
       true,
+    );
+    await queryRunner.createForeignKey(
+      'users',
+      new TableForeignKey({
+        columnNames: ['ward_id'],
+        referencedColumnNames: ['id'],
+        referencedTableName: 'wards',
+      }),
     );
   }
 

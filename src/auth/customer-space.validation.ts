@@ -16,10 +16,6 @@ export class IsSpace implements ValidatorConstraintInterface {
     }
     return true;
   }
-
-  defaultMessage(args: ValidationArguments) {
-    return 'Password not allow space';
-  }
 }
 
 export function NotSpace(validationOptions?: ValidationOptions) {
