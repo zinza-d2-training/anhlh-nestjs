@@ -8,6 +8,7 @@ import {
 } from 'class-validator';
 import { AllowNotSpace } from './customer-space.validation';
 import { CheckLength } from './customer-length.validation';
+
 export class UserRegisterDto {
   @MaxLength(45)
   @IsEmail({ message: 'Email does not match' })
