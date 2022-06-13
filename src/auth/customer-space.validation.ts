@@ -7,26 +7,26 @@ import {
 } from 'class-validator';
 
 @ValidatorConstraint({ async: true })
-export class IsSpace implements ValidatorConstraintInterface {
+export class CheckSpace implements ValidatorConstraintInterface {
   validate(text: string, args: ValidationArguments) {
     const regex = '^\\S*$';
-    const isSpace = text.match(regex);
-    if (!isSpace) {
-      return false;
+    const hasNotSpace = text.match(regex);
+    if (hasNotSpace) {
+      return true;
     }
-    return true;
+    return false;
   }
 }
 
-export function NotSpace(validationOptions?: ValidationOptions) {
+export function AllowNotSpace(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
-      name: 'IsSpace',
+      name: 'CheckSpace',
       target: object.constructor,
       propertyName: propertyName,
       constraints: [],
       options: validationOptions,
-      validator: IsSpace,
+      validator: CheckSpace,
     });
   };
 }

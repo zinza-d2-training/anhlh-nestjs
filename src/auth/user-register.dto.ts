@@ -6,7 +6,7 @@ import {
   Min,
   MaxLength,
 } from 'class-validator';
-import { NotSpace } from './customer-space.validation';
+import { AllowNotSpace } from './customer-space.validation';
 import { CheckLength } from './customer-length.validation';
 export class UserRegisterDto {
   @MaxLength(45)
@@ -16,7 +16,7 @@ export class UserRegisterDto {
 
   @MinLength(8)
   @MaxLength(45)
-  @NotSpace({ message: 'Password not allow space' })
+  @AllowNotSpace({ message: 'Password not allow space' })
   @IsNotEmpty({ message: 'Password cannot be left blank' })
   password: string;
 
