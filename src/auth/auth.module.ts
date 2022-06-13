@@ -8,6 +8,9 @@ import { JwtStrategy } from './jwt.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { AuthController } from './auth.controller';
+import Ward from 'src/entities/ward';
+import Province from 'src/entities/province';
+import District from 'src/entities/district';
 
 @Module({
   imports: [
@@ -16,7 +19,7 @@ import { AuthController } from './auth.controller';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1h' },
     }),
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, Ward, District, Province]),
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],

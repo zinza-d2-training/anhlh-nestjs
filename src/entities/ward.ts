@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('wards')
 class Ward {
+  [x: string]: any;
   @PrimaryGeneratedColumn()
   public id: number;
 
@@ -10,7 +11,6 @@ class Ward {
 
   @Column()
   public district_id: number;
-
   @Column({
     type: 'timestamp',
   })
