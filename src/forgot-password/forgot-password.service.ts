@@ -1,17 +1,28 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 import { RequestUser } from './request-user.interface';
 import { jwtConstants } from 'src/utils/constants';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import User from 'src/entities/User';
 
 @Injectable()
 export class ForgotPasswordService {
-  constructor(private mailerService: MailerService) {}
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
+    private mailerService: MailerService,
+  ) {}
 
-  async sendUserConfirmation(
-    bearerToken: string,
-    email: string,
-    user: RequestUser,
-  ) {
+  async sendUserConfirmation(bearerToken: string, email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      return new UnauthorizedException('Email does not exist', '404');
+    }
     const token = bearerToken.replace('Bearer ', '');
     const url = `localhost:3000/forgot-password/confirm?token=${token}`;
     console.log(url);

@@ -4,6 +4,8 @@ import { JwtStrategy } from 'src/utils/jwt.strategy';
 import { ForgotPasswordController } from './forgot-password.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
 import * as dotenv from 'dotenv';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import User from 'src/entities/User';
 dotenv.config();
 
 @Module({
@@ -23,6 +25,7 @@ dotenv.config();
       },
       preview: true,
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   providers: [ForgotPasswordService, JwtStrategy],
   controllers: [ForgotPasswordController],

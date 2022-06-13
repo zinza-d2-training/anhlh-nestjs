@@ -19,12 +19,8 @@ export class ForgotPasswordController {
   constructor(private forgotPassworService: ForgotPasswordService) {}
   @UseGuards(JwtAuthGuard)
   @Post('/')
-  sendMail(
-    @Body() email: string,
-    @Headers('Authorization') token: string,
-    @GetUser() user: RequestUser,
-  ) {
-    return this.forgotPassworService.sendUserConfirmation(token, email, user);
+  sendMail(@Body() email: string, @Headers('Authorization') token: string) {
+    return this.forgotPassworService.sendUserConfirmation(token, email);
   }
   @Get('/confirm')
   restPassword(@Query() token: string) {}
