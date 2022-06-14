@@ -1,12 +1,15 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { UserInterface } from '../user/type';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { Repository } from 'typeorm';
-import { UserRegisterDto } from './user-register.dto';
 import { UserLoginInterface } from './user-login.interface';
+import { UserRegisterDto } from './user-register.dto';
 
 @Injectable()
 export class AuthService {
@@ -29,27 +32,38 @@ export class AuthService {
     return null;
   }
 
-  async registerUser(body: UserRegisterDto) {
-    const { email, password } = body;
-    const hasUser = await this.userRepository.findOne({ email });
-    const saltRounds = 10;
-    if (hasUser) {
-      return 'user already exists';
-    }
-
-    const hashPass = await bcrypt.hashSync(password, saltRounds);
-    const user = await this.userRepository.create({
-      email,
-      password: hashPass,
-    });
-    return user;
-  }
-
   async login(user: UserLoginInterface) {
     const payload = { email: user.email, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async registerUser(body: UserRegisterDto) {
+    const { email, password, ward_id, identity_card_number, gender, fullname } =
+      body;
+    const hasUser = await this.userRepository.findOne({ email });
+    const hasIdentityCardNumber = await this.userRepository.findOne({
+      identity_card_number,
+    });
+    const saltRounds = 10;
+    if (hasIdentityCardNumber) {
+      return 'Identity Card Number already exists';
+    }
+    if (hasUser) {
+      return 'user already exists';
+    }
+    const hashPass = bcrypt.hashSync(password, saltRounds);
+    const user = await this.userRepository.save({
+      email,
+      password: hashPass,
+      fullname,
+      ward_id,
+      gender,
+      identity_card_number,
+      role: 'user',
+    });
+    return user;
   }
 
   logout() {

@@ -34,7 +34,7 @@ export class ImportUnitAdministrativeService {
     );
     for (const province of unitAdministratives) {
       const isExistListProvince: boolean = provinces.some(
-        (province) => province.name == province['Tỉnh Thành Phố'],
+        (elementProvince) => elementProvince.name == province['Tỉnh Thành Phố'],
       );
       if (!isExistListProvince) {
         provinces.push({ name: province['Tỉnh Thành Phố'] });
@@ -43,16 +43,16 @@ export class ImportUnitAdministrativeService {
     await this.provinceRepository.insert(provinces);
 
     const listProvinceFromDB = await this.provinceRepository.find();
-    for (const district of unitAdministratives) {
-      for (const province of listProvinceFromDB) {
-        if (province.name === district['Tỉnh Thành Phố']) {
+    for (const unitAdministrative of unitAdministratives) {
+      for (const provinceFromDB of listProvinceFromDB) {
+        if (provinceFromDB.name === unitAdministrative['Tỉnh Thành Phố']) {
           const isExistedDistrict = districts.some(
-            (district) => district.name === district['Quận Huyện'],
+            (district) => district.name === unitAdministrative['Quận Huyện'],
           );
           if (!isExistedDistrict) {
             districts.push({
-              name: district['Quận Huyện'],
-              province_id: province.id,
+              name: unitAdministrative['Quận Huyện'],
+              province_id: provinceFromDB.id,
             });
           }
         }
@@ -61,11 +61,11 @@ export class ImportUnitAdministrativeService {
     await this.districtRepository.insert(districts);
 
     const listDistrictFromDB = await this.districtRepository.find();
-    for (const ward of unitAdministratives) {
+    for (const unitAdministrative of unitAdministratives) {
       for (const district of listDistrictFromDB) {
-        if (district.name === ward['Quận Huyện']) {
+        if (district.name === unitAdministrative['Quận Huyện']) {
           wards.push({
-            name: ward['Phường Xã'] || 'Undefined data',
+            name: unitAdministrative['Phường Xã'] || 'Undefined data',
             district_id: district.id,
           });
         }
