@@ -33,6 +33,9 @@ class User {
   @Column({ unique: true })
   identity_card_number: number;
 
+  @Column({})
+  birthday: string;
+
   @OneToOne(() => Ward)
   ward: Ward;
 

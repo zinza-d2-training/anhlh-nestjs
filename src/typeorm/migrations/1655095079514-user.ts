@@ -29,13 +29,17 @@ export class users1655095079514 implements MigrationInterface {
             length: '255',
           },
           {
+            name: 'birthday',
+            type: 'varchar',
+          },
+          {
             name: 'ward_id',
             type: 'integer',
           },
           {
             name: 'password',
             type: 'varchar',
-            length: '45',
+            length: '255',
           },
           {
             name: 'identity_card_number',

@@ -15,7 +15,7 @@ export class UserRegisterDto {
   email: string;
 
   @MinLength(8)
-  @MaxLength(45)
+  @MaxLength(255)
   @AllowNotSpace({ message: 'Password not allow space' })
   @IsNotEmpty({ message: 'Password cannot be left blank' })
   password: string;
@@ -30,6 +30,9 @@ export class UserRegisterDto {
 
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;
+
+  @IsNotEmpty({ message: 'Birthday cannot be left blank' })
+  birthday: string;
 
   @CheckLength({ message: 'Identity Card Number equal 9 or equal 12' })
   @IsNotEmpty({ message: 'Identity Card Number cannot be left blank' })

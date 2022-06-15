@@ -14,10 +14,7 @@ const config: TypeOrmModuleOptions = {
   logger: 'advanced-console',
   autoLoadEntities: true,
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-  entities: [
-    __dirname + '/entities/**/*{.ts,.js}',
-    __dirname + './build/src/entity/*.js',
-  ],
+  entities: [__dirname + '/entities/**/*{.ts,.js}'],
   cli: {
     migrationsDir: 'src/typeorm/migrations',
   },
