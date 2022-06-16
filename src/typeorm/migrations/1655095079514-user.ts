@@ -30,7 +30,7 @@ export class users1655095079514 implements MigrationInterface {
           },
           {
             name: 'birthday',
-            type: 'varchar',
+            type: 'date',
           },
           {
             name: 'ward_id',

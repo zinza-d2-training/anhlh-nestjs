@@ -4,9 +4,11 @@ import {
   MinLength,
   Min,
   MaxLength,
+  IsDate,
 } from 'class-validator';
 import { AllowNotSpace } from './customer-space.validation';
 import { CheckLength } from './customer-length.validation';
+import { Type } from 'class-transformer';
 
 export class UserRegisterDto {
   @MaxLength(45)
@@ -31,6 +33,8 @@ export class UserRegisterDto {
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;
 
+  @Type(() => Date)
+  @IsDate({ message: 'birthday must be of type mm/dd/yyyy' })
   @IsNotEmpty({ message: 'Birthday cannot be left blank' })
   birthday: string;
 

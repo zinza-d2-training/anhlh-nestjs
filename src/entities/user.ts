@@ -34,7 +34,7 @@ class User {
   identity_card_number: number;
 
   @Column({})
-  birthday: string;
+  birthday: Date;
 
   @OneToOne(() => Ward)
   ward: Ward;
