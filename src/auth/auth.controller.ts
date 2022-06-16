@@ -16,11 +16,6 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  @Get('data-administrative-unit')
-  async getAddministrativeUnit() {
-    return this.authService.getUnitAdministrative()
-  }
-
   @Post('register')
   async register(@Body() body: UserRegisterDto) {
     return this.authService.registerUser(body);

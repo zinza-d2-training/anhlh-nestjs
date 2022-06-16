@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ConsoleModule } from '@squareboat/nest-console';
 import { ImportUnitAdministrativeModule } from './import_unit_administrative/import_unit_administrative.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ImportUnitAdministrativeModule } from './import_unit_administrative/imp
     AuthModule,
     ConsoleModule,
     ImportUnitAdministrativeModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
