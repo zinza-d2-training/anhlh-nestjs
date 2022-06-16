@@ -16,7 +16,7 @@ class User {
   public email: string;
 
   @Column()
-  public fullname: string;
+  public fullName: string;
 
   @Column()
   public password: string;

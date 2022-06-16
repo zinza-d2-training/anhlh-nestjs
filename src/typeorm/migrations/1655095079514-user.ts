@@ -19,7 +19,7 @@ export class users1655095079514 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'fullname',
+            name: 'fullName',
             type: 'varchar',
             length: '45',
           },
