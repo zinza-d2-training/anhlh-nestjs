@@ -36,7 +36,7 @@ export class UserRegisterDto {
   @Type(() => Date)
   @IsDate({ message: 'birthday must be of type mm/dd/yyyy' })
   @IsNotEmpty({ message: 'Birthday cannot be left blank' })
-  birthday: string;
+  birthday: Date;
 
   @CheckLength({ message: 'Identity Card Number equal 9 or equal 12' })
   @IsNotEmpty({ message: 'Identity Card Number cannot be left blank' })
