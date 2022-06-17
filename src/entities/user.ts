@@ -16,7 +16,7 @@ class User {
   public email: string;
 
   @Column()
-  public fullname: string;
+  public fullName: string;
 
   @Column()
   public password: string;
@@ -32,6 +32,9 @@ class User {
 
   @Column({ unique: true })
   identity_card_number: number;
+
+  @Column({})
+  birthday: Date;
 
   @OneToOne(() => Ward)
   ward: Ward;

@@ -1,8 +1,4 @@
-import {
-  HttpException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +6,7 @@ import User from 'src/entities/User';
 import { Repository } from 'typeorm';
 import { UserLoginInterface } from './user-login.interface';
 import { UserRegisterDto } from './user-register.dto';
+import { ValidateUserException } from 'src/utils/validate.exception';
 
 @Injectable()
 export class AuthService {
@@ -20,14 +17,20 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string) {
-    const user = await this.userRepository.findOne({ email });
-    if (!user) {
-      throw new UnauthorizedException('User does not exist', '401');
+    const findEmail = await this.userRepository.findOne({ where: { email } });
+    if (!findEmail) {
+      throw new ValidateUserException({
+        email: ['Email does not exist'],
+      });
     }
-    const comparePassword = await bcrypt.compare(pass, user.password);
+    const comparePassword = await bcrypt.compare(pass, findEmail.password);
     if (comparePassword) {
-      const { password, ...emailAndId } = user;
+      const { password, ...emailAndId } = findEmail;
       return emailAndId;
+    } else {
+      throw new ValidateUserException({
+        password: ['password is not correct'],
+      });
     }
     return null;
   }
@@ -35,33 +38,46 @@ export class AuthService {
   async login(user: UserLoginInterface) {
     const payload = { email: user.email, sub: user.id };
     return {
+      user: user,
       access_token: this.jwtService.sign(payload),
     };
   }
 
   async registerUser(body: UserRegisterDto) {
-    const { email, password, ward_id, identity_card_number, gender, fullname } =
-      body;
+    const {
+      email,
+      password,
+      ward_id,
+      identity_card_number,
+      gender,
+      fullName,
+      birthday,
+    } = body;
     const hasUser = await this.userRepository.findOne({ email });
     const hasIdentityCardNumber = await this.userRepository.findOne({
       identity_card_number,
     });
     const saltRounds = 10;
     if (hasIdentityCardNumber) {
-      return 'Identity Card Number already exists';
+      throw new ValidateUserException({
+        identity_card_number: ['Identity Card Number does exist'],
+      });
     }
     if (hasUser) {
-      return 'user already exists';
+      throw new ValidateUserException({
+        email: ['Email does exist'],
+      });
     }
-    const hashPass = bcrypt.hashSync(password, saltRounds);
+    const hashPass = await bcrypt.hashSync(password, saltRounds);
     const user = await this.userRepository.save({
       email,
       password: hashPass,
-      fullname,
+      fullName,
       ward_id,
       gender,
       identity_card_number,
       role: 'user',
+      birthday,
     });
     return user;
   }

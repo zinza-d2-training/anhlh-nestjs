@@ -4,9 +4,11 @@ import {
   MinLength,
   Min,
   MaxLength,
+  IsDate,
 } from 'class-validator';
 import { AllowNotSpace } from './customer-space.validation';
 import { CheckLength } from './customer-length.validation';
+import { Type } from 'class-transformer';
 
 export class UserRegisterDto {
   @MaxLength(45)
@@ -15,14 +17,14 @@ export class UserRegisterDto {
   email: string;
 
   @MinLength(8)
-  @MaxLength(45)
+  @MaxLength(255)
   @AllowNotSpace({ message: 'Password not allow space' })
   @IsNotEmpty({ message: 'Password cannot be left blank' })
   password: string;
 
   @MaxLength(45)
-  @IsNotEmpty({ message: 'Fullname cannot be left blank' })
-  fullname: string;
+  @IsNotEmpty({ message: 'FullName cannot be left blank' })
+  fullName: string;
 
   @Min(1)
   @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
@@ -30,6 +32,11 @@ export class UserRegisterDto {
 
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;
+
+  @Type(() => Date)
+  @IsDate({ message: 'birthday must be of type mm/dd/yyyy' })
+  @IsNotEmpty({ message: 'Birthday cannot be left blank' })
+  birthday: Date;
 
   @CheckLength({ message: 'Identity Card Number equal 9 or equal 12' })
   @IsNotEmpty({ message: 'Identity Card Number cannot be left blank' })
