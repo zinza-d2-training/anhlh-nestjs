@@ -1,11 +1,6 @@
-import {
-  HttpException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import { RequestUser } from './request-user.interface';
-import { jwtConstants } from 'src/utils/constants';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import User from 'src/entities/User';
@@ -13,22 +8,26 @@ import User from 'src/entities/User';
 @Injectable()
 export class ForgotPasswordService {
   constructor(
+    private jwtService: JwtService,
+    private mailerService: MailerService,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private mailerService: MailerService,
   ) {}
 
-  async sendUserConfirmation(bearerToken: string, email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+  async sendUserConfirmation(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email },
+    });
     if (!user) {
       return new UnauthorizedException('Email does not exist', '404');
     }
-    const token = bearerToken.replace('Bearer ', '');
+    const payload = { email: user.email, sub: user.id };
+    const token = this.jwtService.sign(payload);
+    await this.userRepository.save({ ...user, reset_link: token });
     const url = `localhost:3000/forgot-password/confirm?token=${token}`;
-    console.log(url);
     await this.mailerService.sendMail({
-      to: email,
-      from: 'anh.lh@zinza.vn.com',
+      to: user.email,
+      from: process.env.MAIL_FROM,
       subject: 'Welcome to Nice App! Confirm your Email',
       html: `<b>${url}</b>`,
       context: {
@@ -37,9 +36,17 @@ export class ForgotPasswordService {
       },
     });
   }
-  async restPassword(token) {
-    // jwt.verify(token, jwtConstants, function (err, decoded) {
-    //   console.log(decoded.foo); // bar
-    // });
+  async restPassword(token: string) {
+    const hasToken = await this.userRepository.find({
+      where: { reset_link: token },
+    });
+    if (hasToken) {
+      var string_length = 8;
+      var randomPassword = '';
+      for (var i = 0; i < string_length; i++) {
+        randomPassword = Math.random().toString(36).slice(-8);
+      }
+      return randomPassword;
+    }
   }
 }

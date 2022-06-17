@@ -6,6 +6,8 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import * as dotenv from 'dotenv';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import User from 'src/entities/User';
+import { JwtModule } from '@nestjs/jwt';
+import { jwtConstants } from 'src/auth/constants';
 dotenv.config();
 
 @Module({
@@ -25,9 +27,14 @@ dotenv.config();
       },
       preview: true,
     }),
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
+    }),
     TypeOrmModule.forFeature([User]),
   ],
   providers: [ForgotPasswordService, JwtStrategy],
   controllers: [ForgotPasswordController],
+  exports: [ForgotPasswordService],
 })
 export class ForgotPasswordModule {}

@@ -7,24 +7,26 @@ import {
 } from 'class-validator';
 
 @ValidatorConstraint({ async: true })
-export class Length implements ValidatorConstraintInterface {
+export class CheckSpace implements ValidatorConstraintInterface {
   validate(text: string, args: ValidationArguments) {
-    return text.length == 9 || text.length == 12;
-  }
-
-  defaultMessage(args: ValidationArguments) {
-    return 'Password not allow space';
+    const regex = '^\\S*$';
+    const hasNotSpace = text.match(regex);
+    if (hasNotSpace) {
+      return true;
+    }
+    return false;
   }
 }
-export function CheckLength(validationOptions?: ValidationOptions) {
+
+export function AllowNotSpace(validationOptions?: ValidationOptions) {
   return function (object: Object, propertyName: string) {
     registerDecorator({
-      name: 'Length',
+      name: 'CheckSpace',
       target: object.constructor,
       propertyName: propertyName,
       constraints: [],
       options: validationOptions,
-      validator: Length,
+      validator: CheckSpace,
     });
   };
 }

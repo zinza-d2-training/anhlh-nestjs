@@ -7,9 +7,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { ConsoleModule } from '@squareboat/nest-console';
 import { ImportUnitAdministrativeModule } from './import_unit_administrative/import_unit_administrative.module';
-import { UserRegisterModule } from './user_registration/user-register.module';
-import { ForgotPasswordController } from './forgot-password/forgot-password.controller';
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
+import { LocationModule } from './location/location.module';
 
 @Module({
   imports: [
@@ -21,8 +20,8 @@ import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
     AuthModule,
     ConsoleModule,
     ImportUnitAdministrativeModule,
-    UserRegisterModule,
     ForgotPasswordModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

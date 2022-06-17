@@ -1,27 +1,16 @@
-import {
-  Controller,
-  Post,
-  Get,
-  Body,
-  Patch,
-  Param,
-  Query,
-  Headers,
-  UseGuards,
-} from '@nestjs/common';
-import { GetUser } from 'src/auth/get-user.decorators';
-import { JwtAuthGuard } from '../utils/jwt-auth.guard';
+import { Controller, Post, Get, Body, Query } from '@nestjs/common';
 import { ForgotPasswordService } from './forgot-password.service';
-import { RequestUser } from './request-user.interface';
 
 @Controller('/forgot-password')
 export class ForgotPasswordController {
-  constructor(private forgotPassworService: ForgotPasswordService) {}
-  @UseGuards(JwtAuthGuard)
+  constructor(private forgotPasswordService: ForgotPasswordService) {}
   @Post('/')
-  sendMail(@Body() email: string, @Headers('Authorization') token: string) {
-    return this.forgotPassworService.sendUserConfirmation(token, email);
+  async sendMail(@Body('email') email: string) {
+    return await this.forgotPasswordService.sendUserConfirmation(email);
   }
+
   @Get('/confirm')
-  restPassword(@Query() token: string) {}
+  async restPassword(@Query('token') token: string) {
+    return await this.forgotPasswordService.restPassword(token);
+  }
 }

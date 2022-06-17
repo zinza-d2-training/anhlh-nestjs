@@ -43,6 +43,7 @@
       "global": "^4.4.0",
       "mysql2": "^2.3.3",
       "nest-console": "^6.10.4",
+      "nodemailer": "^6.7.5",
       "passport": "^0.6.0",
       "passport-jwt": "^4.0.0",
       "passport-local": "^1.0.0",
