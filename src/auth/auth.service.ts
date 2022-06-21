@@ -80,7 +80,10 @@ export class AuthService {
       role: 'user',
       birthday,
     });
-    return user;
+    return {
+      message: 'success',
+      status: 200,
+    };
   }
 
   logout() {

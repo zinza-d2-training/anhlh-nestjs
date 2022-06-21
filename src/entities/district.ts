@@ -5,18 +5,23 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Tree,
+  TreeChildren,
 } from 'typeorm';
 import Province from './province';
 import Ward from './ward';
 
 @Entity('districts')
+// @Tree('nested-set')
 class District {
   @PrimaryGeneratedColumn()
   public id: number;
 
+  // @TreeChildren()
+  // children: District[];
+
   @Column()
   public name: string;
-
   @Column()
   public province_id: number;
 
@@ -24,9 +29,8 @@ class District {
   @JoinColumn({ name: 'province_id' })
   province: Province;
 
-  @OneToMany(() => Ward, (ward) => ward.district)
-  ward: Ward[];
-
+  @OneToMany(() => Ward, (ward) => ward.districts)
+  wards: Ward[];
   @Column({
     type: 'timestamp',
   })
