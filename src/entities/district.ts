@@ -24,9 +24,8 @@ class District {
   @JoinColumn({ name: 'province_id' })
   province: Province;
 
-  @OneToMany(() => Ward, (ward) => ward.district)
-  ward: Ward[];
-
+  @OneToMany(() => Ward, (ward) => ward.districts)
+  wards: Ward[];
   @Column({
     type: 'timestamp',
   })

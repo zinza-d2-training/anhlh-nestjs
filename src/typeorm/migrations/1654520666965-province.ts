@@ -1,3 +1,4 @@
+import { stringify } from 'querystring';
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class province1654520666965 implements MigrationInterface {

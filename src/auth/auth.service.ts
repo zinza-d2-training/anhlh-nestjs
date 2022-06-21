@@ -81,7 +81,10 @@ export class AuthService {
       birthday,
       reset_link: '',
     });
-    return user;
+    return {
+      message: 'success',
+      status: 200,
+    };
   }
 
   logout() {
