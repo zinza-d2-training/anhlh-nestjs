@@ -5,23 +5,18 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Tree,
-  TreeChildren,
 } from 'typeorm';
 import Province from './province';
 import Ward from './ward';
 
 @Entity('districts')
-// @Tree('nested-set')
 class District {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  // @TreeChildren()
-  // children: District[];
-
   @Column()
   public name: string;
+
   @Column()
   public province_id: number;
 
