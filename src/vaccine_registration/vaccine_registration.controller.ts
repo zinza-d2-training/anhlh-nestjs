@@ -7,7 +7,9 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+
 import { GetUser } from 'src/auth/get-user.decorators';
+import { IsAdmin } from 'src/utils/check_admin.guard';
 import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
 import { RegisterInjectionDto } from './register_injection.dto';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
@@ -15,29 +17,28 @@ import { VaccineRegistrationService } from './vaccine_registration.service';
 
 @Controller('/vaccine-registration')
 export class VaccineRegistrationController {
-  constructor(
-    private vaccineRegistrationCService: VaccineRegistrationService,
-  ) {}
+  constructor(private vaccineRegistrationService: VaccineRegistrationService) {}
 
   @Post('/')
   async createRegisterInjection(@Body() body: RegisterInjectionDto) {
-    return await this.vaccineRegistrationCService.createRegisterInjection(body);
+    return await this.vaccineRegistrationService.createRegisterInjection(body);
   }
-  @Get('/')
+  @UseGuards(JwtAuthGuard, IsAdmin)
+  @Get('/show')
   async getAllUserRegisterInjection() {
-    return await this.vaccineRegistrationCService.getAllUserRegisterInjection();
+    return await this.vaccineRegistrationService.getAllUserRegisterInjection();
   }
-  @Get('/')
+  @Get('/showId')
   async getUserRegisterInjection(@GetUser('id') id: string) {
-    return await this.vaccineRegistrationCService.getUserRegisterInjection(id);
+    return await this.vaccineRegistrationService.getUserRegisterInjection(id);
   }
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsAdmin)
   @Put('/:id')
   async UpdateUserRegisterInjection(
     @Param('id') id: string,
-    updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
+    @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
   ) {
-    return await this.vaccineRegistrationCService.updateUserRegisterInjection(
+    return await this.vaccineRegistrationService.updateUserRegisterInjection(
       id,
       updateUserRegisterInjectionDto,
     );

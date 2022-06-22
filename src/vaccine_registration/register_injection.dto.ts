@@ -25,6 +25,9 @@ export class RegisterInjectionDto {
   @IsNotEmpty({ message: 'session cannot be left blank' })
   session_id: string;
 
+  @IsNotEmpty({ message: 'status cannot be left blank' })
+  status: string;
+
   created_at?: Date;
 
   updated_at?: Date;

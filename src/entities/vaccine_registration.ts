@@ -27,9 +27,6 @@ class VaccineRegistration {
   address: string;
 
   @Column()
-  gender: string;
-
-  @Column()
   session_id: string;
 
   @Column()

@@ -40,16 +40,17 @@ export class VaccineRegistrationService {
     return await this.vaccineRegistrationRepository.find();
   }
   async getUserRegisterInjection(id: string) {
-    return await this.vaccineRegistrationRepository.find({ where: { id } });
+    return await this.vaccineRegistrationRepository.findOne({ where: { id } });
   }
   async updateUserRegisterInjection(
     id: string,
-    updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
+    body: UpdateUserRegisterInjectionDto,
   ) {
-    const userRegisterInjection = await this.vaccineRegistrationRepository.find(
-      { where: { id } },
+    const userRegisterInjection =
+      await this.vaccineRegistrationRepository.findOne({ where: { id } });
+    return await this.vaccineRegistrationRepository.update(
+      userRegisterInjection,
+      body,
     );
-    Object.assign(userRegisterInjection, updateUserRegisterInjectionDto);
-    return await this.vaccineRegistrationRepository.save(userRegisterInjection);
   }
 }

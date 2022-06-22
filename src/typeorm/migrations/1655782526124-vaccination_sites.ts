@@ -5,57 +5,42 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export class vaccine_registration1655886666556 implements MigrationInterface {
+export class vaccination_sites1655782526124 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'vaccine_registrations',
+        name: 'vaccination_sites',
         columns: [
           {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            length: '11',
             isGenerated: true,
             generationStrategy: 'increment',
           },
           {
-            name: 'priority_group_id',
+            name: 'name',
+            type: 'varchar',
+            length: '255',
+          },
+          {
+            name: 'ward_id',
             type: 'int',
           },
           {
-            name: 'user_id',
-            type: 'int',
-          },
-          {
-            name: 'health_insurance_number',
-            type: 'int',
-          },
-          {
-            name: 'expected_date',
-            type: 'date',
-          },
-          {
-            name: 'occupation',
+            name: 'street_name',
             type: 'varchar',
             length: '45',
           },
           {
-            name: 'work_place',
+            name: 'manager',
             type: 'varchar',
             length: '45',
           },
           {
-            name: 'address',
-            type: 'varchar',
-            length: '45',
-          },
-          {
-            name: 'session_id',
-            type: 'varchar',
-          },
-          {
-            name: 'status',
-            type: 'varchar',
+            name: 'total_table',
+            type: 'int',
           },
           {
             name: 'created_at',
@@ -74,24 +59,16 @@ export class vaccine_registration1655886666556 implements MigrationInterface {
       true,
     );
     await queryRunner.createForeignKey(
-      'vaccine_registrations',
+      'vaccination_sites',
       new TableForeignKey({
-        columnNames: ['user_id'],
+        columnNames: ['ward_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-      }),
-    );
-    await queryRunner.createForeignKey(
-      'vaccine_registrations',
-      new TableForeignKey({
-        columnNames: ['priority_group_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'priority_groups',
+        referencedTableName: 'wards',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('vaccine_registrations');
+    await queryRunner.dropTable('vaccination_sites');
   }
 }
