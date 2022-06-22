@@ -38,7 +38,8 @@ export class AuthService {
   async login(user: UserLoginInterface) {
     const payload = { email: user.email, sub: user.id };
     return {
-      user: user,
+      id: user.id,
+      email: user.email,
       access_token: this.jwtService.sign(payload),
     };
   }
@@ -79,7 +80,10 @@ export class AuthService {
       role: 'user',
       birthday,
     });
-    return user;
+    return {
+      message: 'success',
+      status: 200,
+    };
   }
 
   logout() {

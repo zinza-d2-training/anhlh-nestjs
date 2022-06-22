@@ -17,9 +17,30 @@ export class LocationService {
   ) {}
 
   async getUnitAdministrative() {
-    const wards = await this.wardRepository.find();
-    const districts = await this.districtRepository.find();
-    const provinces = await this.provinceRepository.find();
-    return { provinces, districts, wards };
+
+    const wardsFromDB = await this.wardRepository.find();
+    const districtsFromDB = await this.districtRepository.find();
+    const provincesFromDB = await this.provinceRepository.find();
+
+    districtsFromDB.map((district) => {
+      district.wards = [];
+      wardsFromDB.map((ward) => {
+        if (district.id === ward['district_id']) {
+          district.wards.push(ward);
+        }
+      });
+      return district;
+    });
+    provincesFromDB.map((province) => {
+      province['districts'] = [];
+      districtsFromDB.map((district) => {
+        if (province.id === district['province_id']) {
+          province['districts'].push(district);
+        }
+      });
+      return province;
+    });
+    return provincesFromDB;
+
   }
 }
