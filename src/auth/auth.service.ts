@@ -51,7 +51,7 @@ export class AuthService {
       ward_id,
       identity_card_number,
       gender,
-      fullName,
+      full_name,
       birthday,
     } = body;
     const hasUser = await this.userRepository.findOne({ email });
@@ -69,11 +69,11 @@ export class AuthService {
         email: ['Email does exist'],
       });
     }
-    const hashPass = bcrypt.hashSync(password, saltRounds);
+    const hashPass = await bcrypt.hashSync(password, saltRounds);
     const user = await this.userRepository.save({
       email,
       password: hashPass,
-      fullName,
+      full_name,
       ward_id,
       gender,
       identity_card_number,
