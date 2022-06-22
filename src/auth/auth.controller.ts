@@ -5,6 +5,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { GetUser } from './get-user.decorators';
 import { UserLoginInterface } from './user-login.interface';
 import { UserRegisterDto } from './user-register.dto';
+import { IsAdmin } from 'src/utils/check_admin.guard';
 
 @Controller('/auth')
 export class AuthController {
@@ -26,7 +27,7 @@ export class AuthController {
     return this.authService.logout();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsAdmin)
   @Get('profile')
   async getProfile(@GetUser('id') id: number) {
     return await this.authService.getProfile(id);
