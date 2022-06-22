@@ -16,6 +16,10 @@ export class UserService {
     return await this.userRepository.findOne({ email });
   }
 
+  async findAll() {
+    return await this.userRepository.find();
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ id });
     Object.assign(user, updateUserDto);
