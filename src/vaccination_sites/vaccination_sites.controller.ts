@@ -7,6 +7,7 @@ import {
   Put,
   UseGuards,
 } from '@nestjs/common';
+import { IsAdmin } from 'src/utils/check_admin.guard';
 import { JwtAuthGuard } from '../utils/jwt-auth.guard';
 import {
   CreateDataVaccinationSiteDto,
@@ -24,13 +25,13 @@ export class VaccinationSiteController {
     return await this.vaccinationSiteService.getAllDataVaccinationSite();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsAdmin)
   @Post('/create')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.vaccinationSiteService.createDataVaccinationSite(body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, IsAdmin)
   @Put('/update/:id')
   async updateDataVaccinationSite(
     @Param('id') id: string,

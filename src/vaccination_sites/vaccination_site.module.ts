@@ -9,16 +9,18 @@ import VaccinationSite from 'src/entities/vaccination_site';
 import { JwtStrategy } from '../utils/jwt.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/auth/constants';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
-    // JwtModule.register({
-    //   secret: jwtConstants.secret,
-    //   signOptions: { expiresIn: '1h' },
-    // }),
+    PassportModule,
+    JwtModule.register({
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '1h' },
+    }),
     TypeOrmModule.forFeature([Ward, District, Province, VaccinationSite]),
   ],
-  controllers: [VaccinationSiteController, JwtStrategy],
-  providers: [VaccinationSiteService],
+  controllers: [VaccinationSiteController],
+  providers: [VaccinationSiteService, JwtStrategy],
 })
 export class VaccinationSiteModule {}
