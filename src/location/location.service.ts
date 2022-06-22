@@ -17,18 +17,19 @@ export class LocationService {
   ) {}
 
   async getUnitAdministrative() {
+
     const wardsFromDB = await this.wardRepository.find();
     const districtsFromDB = await this.districtRepository.find();
     const provincesFromDB = await this.provinceRepository.find();
 
-    districtsFromDB.map((element: any) => {
-      element.wards = [];
+    districtsFromDB.map((district) => {
+      district.wards = [];
       wardsFromDB.map((ward) => {
-        if (element.id === ward['district_id']) {
-          element.wards.push(ward);
+        if (district.id === ward['district_id']) {
+          district.wards.push(ward);
         }
       });
-      return element;
+      return district;
     });
     provincesFromDB.map((province) => {
       province['districts'] = [];
@@ -40,5 +41,6 @@ export class LocationService {
       return province;
     });
     return provincesFromDB;
+
   }
 }
