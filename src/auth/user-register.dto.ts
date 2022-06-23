@@ -24,7 +24,7 @@ export class UserRegisterDto {
 
   @MaxLength(45)
   @IsNotEmpty({ message: 'FullName cannot be left blank' })
-  fullName: string;
+  full_name: string;
 
   @Min(1)
   @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
