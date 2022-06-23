@@ -10,6 +10,7 @@ import { ImportUnitAdministrativeModule } from './import_unit_administrative/imp
 import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { LocationModule } from './location/location.module';
 import { VaccinationSiteModule } from './vaccination_sites/vaccination_site.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { VaccinationSiteModule } from './vaccination_sites/vaccination_site.modu
     ForgotPasswordModule,
     LocationModule,
     VaccinationSiteModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
