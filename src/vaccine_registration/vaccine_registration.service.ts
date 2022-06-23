@@ -36,21 +36,8 @@ export class VaccineRegistrationService {
       work_place,
     });
   }
-  async getAllUserRegisterInjection() {
-    return await this.vaccineRegistrationRepository.find();
-  }
+
   async getUserRegisterInjection(id: string) {
     return await this.vaccineRegistrationRepository.findOne({ where: { id } });
-  }
-  async updateUserRegisterInjection(
-    id: string,
-    body: UpdateUserRegisterInjectionDto,
-  ) {
-    const userRegisterInjection =
-      await this.vaccineRegistrationRepository.findOne({ where: { id } });
-    return await this.vaccineRegistrationRepository.update(
-      userRegisterInjection,
-      body,
-    );
   }
 }

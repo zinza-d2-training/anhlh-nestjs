@@ -1,15 +1,11 @@
-import { forwardRef, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Ward from 'src/entities/ward';
+import Ward from '../entities/ward';
 import { Repository } from 'typeorm';
 import VaccinationSite from 'src/entities/vaccination_site';
 import District from 'src/entities/district';
 import Province from 'src/entities/province';
-import { DataVaccinationSite, RequestDataVaccinationSite } from './type';
-import {
-  CreateDataVaccinationSiteDto,
-  UpdateDataVaccinationSiteDto,
-} from './vaccination_site.dto';
+import { DataVaccinationSite } from './type';
 
 @Injectable()
 export class VaccinationSiteService {
@@ -57,18 +53,45 @@ export class VaccinationSiteService {
     }
     return DataVaccinationSite;
   }
-  async getDataVaccinationSite() {}
-  async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
-    return await this.vaccinationSite.save(body);
-  }
-  async updateDataVaccinationSite(
-    id: string,
-    body: UpdateDataVaccinationSiteDto,
-  ) {
-    const vaccinationSite = await this.vaccinationSite.findOne({
+  async getDataVaccinationSite(id: string) {
+    const vaccination_site = await this.vaccinationSite.findOne({
       where: { id },
     });
-
-    return await this.vaccinationSite.update(vaccinationSite, body);
+    const { total_table, manager, street_name, name } = vaccination_site;
+    let DataVaccinationSite: DataVaccinationSite = null;
+    DataVaccinationSite: DataVaccinationSite = {
+      id: vaccination_site.id,
+      total_table,
+      manager,
+      street_name,
+      name,
+    };
+    const wardId = vaccination_site['ward_id'];
+    const ward = await this.wardRepository.findOne({
+      where: { id: wardId },
+    });
+    const district_id = ward['district_id'];
+    const district = await this.districtRepository.findOne({
+      where: { id: district_id },
+    });
+    const province_id = district['province_id'];
+    const province = await this.provinceRepository.findOne({
+      where: { id: province_id },
+    });
+    DataVaccinationSite['ward'] = {
+      id: ward.id,
+      name: ward.name,
+    };
+    DataVaccinationSite.district = null;
+    DataVaccinationSite['district'] = {
+      id: district.id,
+      name: district.name,
+    };
+    DataVaccinationSite.province = null;
+    DataVaccinationSite['province'] = {
+      id: province.id,
+      name: province.name,
+    };
+    return DataVaccinationSite;
   }
 }
