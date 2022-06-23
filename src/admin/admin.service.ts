@@ -19,7 +19,6 @@ export class AdminService {
     private readonly vaccineRegistrationRepository: Repository<VaccineRegistration>,
   ) {}
 
-  async getDataVaccinationSite() {}
   async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
     return await this.vaccinationSite.save(body);
   }

@@ -15,7 +15,6 @@ import {
 } from './vaccination_site.dto';
 import { AdminService } from './admin.service';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
-import { GetUser } from 'src/utils/get-user.decorators';
 
 @Controller('/admin')
 export class AdminController {
