@@ -4,9 +4,6 @@ export class RegisterInjectionDto {
   @IsNotEmpty({ message: 'priority group cannot be left blank' })
   priority_group_id: number;
 
-  @IsNotEmpty({ message: 'user cannot be left blank' })
-  user_id: number;
-
   @IsNotEmpty({ message: 'health insurance number cannot be left blank' })
   health_insurance_number: number;
 
