@@ -1,5 +1,4 @@
 import { Controller, Get, Param } from '@nestjs/common';
-
 import { VaccinationSiteService } from './vaccination_site.service';
 
 @Controller('/vaccination-site')

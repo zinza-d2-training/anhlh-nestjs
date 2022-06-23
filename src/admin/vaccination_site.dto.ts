@@ -13,9 +13,11 @@ export class CreateDataVaccinationSiteDto {
   @MaxLength(45)
   @IsNotEmpty({ message: 'manager cannot be left blank' })
   manager: string;
+
   @MaxLength(45)
   @IsNotEmpty({ message: 'name cannot be left blank' })
   name: string;
+
   @Min(1)
   @IsNotEmpty({ message: 'ward_id cannot be left blank' })
   ward_id: number;
