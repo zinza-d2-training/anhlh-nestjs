@@ -8,6 +8,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import VaccineRegistration from 'src/entities/vaccine_registration';
+import User from 'src/entities/User';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import VaccineRegistration from 'src/entities/vaccine_registration';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1h' },
     }),
-    TypeOrmModule.forFeature([VaccinationSite, VaccineRegistration]),
+    TypeOrmModule.forFeature([VaccinationSite, VaccineRegistration, User]),
   ],
   controllers: [AdminController],
   providers: [AdminService, JwtStrategy],

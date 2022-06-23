@@ -9,6 +9,8 @@ import {
 } from './vaccination_site.dto';
 import VaccineRegistration from 'src/entities/vaccine_registration';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
+import User from 'src/entities/User';
+import { UpdateUserDto } from 'src/user/update_user.dto';
 
 @Injectable()
 export class AdminService {
@@ -17,6 +19,8 @@ export class AdminService {
     private readonly vaccinationSite: Repository<VaccinationSite>,
     @InjectRepository(VaccineRegistration)
     private readonly vaccineRegistrationRepository: Repository<VaccineRegistration>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
   async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
@@ -48,5 +52,14 @@ export class AdminService {
       userRegisterInjection,
       body,
     );
+  }
+
+  async getAllUser() {
+    return await this.userRepository.find();
+  }
+
+  async updateUser(id: string, updateUserDto: UpdateUserDto) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    return await this.userRepository.update(user, updateUserDto);
   }
 }
