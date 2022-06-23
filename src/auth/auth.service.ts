@@ -76,7 +76,7 @@ export class AuthService {
       ward_id,
       gender,
       identity_card_number,
-      role: 'admin',
+      role: 'user',
       birthday,
       reset_link: '',
     });

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Ward from 'src/entities/ward';
 import { Repository } from 'typeorm';
 import VaccinationSite from 'src/entities/vaccination_site';
 import {

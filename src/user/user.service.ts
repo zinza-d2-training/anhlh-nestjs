@@ -14,28 +14,20 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async findOne(email: string) {
-    return await this.userRepository.findOne({ where: { email } });
+  async findOne(id: string) {
+    return await this.userRepository.findOne({ where: { id } });
   }
 
-  @UseGuards(JwtAuthGuard)
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ id });
-    const {
-      email,
-      password,
-      ward_id,
-      identity_card_number,
-      gender,
-      full_name,
-      birthday,
-    } = updateUserDto;
-    const hasUser = await this.userRepository.findOne({ email });
-    const hasIdentityCardNumber = await this.userRepository.findOne({
-      identity_card_number,
-    });
+    const { password } = updateUserDto;
+
     const saltRounds = 10;
     const hashPass = bcrypt.hashSync(password, saltRounds);
-    return await this.userRepository.update(user, updateUserDto);
+
+    return await this.userRepository.update(user, {
+      ...updateUserDto,
+      password: hashPass,
+    });
   }
 }
