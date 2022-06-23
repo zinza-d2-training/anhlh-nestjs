@@ -10,7 +10,6 @@ const config: TypeOrmModuleOptions = {
   password: process.env.MYSQL_PASSWORD || '',
   database: process.env.MYSQL_DATABASE,
   synchronize: false,
-  migrationsRun: true,
   logger: 'advanced-console',
   autoLoadEntities: true,
   migrations: [__dirname + '/migrations/**/*{.ts,.js}'],

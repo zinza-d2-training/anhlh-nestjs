@@ -24,7 +24,7 @@ export class UserRegisterDto {
 
   @MaxLength(45)
   @IsNotEmpty({ message: 'FullName cannot be left blank' })
-  fullName: string;
+  full_name: string;
 
   @Min(1)
   @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
@@ -41,4 +41,7 @@ export class UserRegisterDto {
   @CheckLength({ message: 'Identity Card Number equal 9 or equal 12' })
   @IsNotEmpty({ message: 'Identity Card Number cannot be left blank' })
   identity_card_number: number;
+
+  @MaxLength(255)
+  reset_link: string;
 }

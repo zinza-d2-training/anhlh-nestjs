@@ -51,7 +51,7 @@ export class AuthService {
       ward_id,
       identity_card_number,
       gender,
-      fullName,
+      full_name,
       birthday,
     } = body;
     const hasUser = await this.userRepository.findOne({ email });
@@ -73,12 +73,13 @@ export class AuthService {
     const user = await this.userRepository.save({
       email,
       password: hashPass,
-      fullName,
+      full_name,
       ward_id,
       gender,
       identity_card_number,
       role: 'user',
       birthday,
+      reset_link: '',
     });
     return {
       message: 'success',

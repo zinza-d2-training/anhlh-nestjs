@@ -19,7 +19,7 @@ export class users1655095079514 implements MigrationInterface {
             generationStrategy: 'increment',
           },
           {
-            name: 'fullName',
+            name: 'full_name',
             type: 'varchar',
             length: '45',
           },
@@ -56,6 +56,10 @@ export class users1655095079514 implements MigrationInterface {
             name: 'role',
             type: 'varchar',
             length: '45',
+          },
+          {
+            name: 'reset_link',
+            type: 'varchar',
           },
           {
             name: 'created_at',

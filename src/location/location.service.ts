@@ -17,7 +17,6 @@ export class LocationService {
   ) {}
 
   async getUnitAdministrative() {
-
     const wardsFromDB = await this.wardRepository.find();
     const districtsFromDB = await this.districtRepository.find();
     const provincesFromDB = await this.provinceRepository.find();
@@ -41,6 +40,5 @@ export class LocationService {
       return province;
     });
     return provincesFromDB;
-
   }
 }

@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Ward from './ward';
 
 @Entity('users')
@@ -16,7 +10,7 @@ class User {
   public email: string;
 
   @Column()
-  public fullName: string;
+  public full_name: string;
 
   @Column()
   public password: string;
@@ -35,6 +29,9 @@ class User {
 
   @Column({})
   birthday: Date;
+
+  @Column({})
+  reset_link: string;
 
   @OneToOne(() => Ward)
   ward: Ward;
