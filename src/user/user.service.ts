@@ -29,9 +29,4 @@ export class UserService {
   async createUser(body: CreateUserDto) {
     return this.userRepository.create(body);
   }
-
-  async remove(id: number) {
-    const user = await this.userRepository.findOne({ id });
-    return await this.userRepository.remove(user);
-  }
 }

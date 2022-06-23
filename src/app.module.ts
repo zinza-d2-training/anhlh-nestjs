@@ -11,6 +11,7 @@ import { ForgotPasswordModule } from './forgot-password/forgot-password.module';
 import { LocationModule } from './location/location.module';
 import { VaccineRegistrationModule } from './vaccine_registration/vaccine_registration.module';
 import { VaccinationSiteModule } from './vaccination_sites/vaccination_site.module';
+import { DocumentModule } from './document/document.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { VaccinationSiteModule } from './vaccination_sites/vaccination_site.modu
     LocationModule,
     VaccineRegistrationModule,
     VaccinationSiteModule,
+    DocumentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
