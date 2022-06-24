@@ -15,6 +15,9 @@ export class DocumentService {
   }
 
   async showLink(id: string) {
-    return await this.documentRepository.findOne({ where: { id } });
+    const document = await this.documentRepository.findOne({ where: { id } });
+    return {
+      link: document.link,
+    };
   }
 }

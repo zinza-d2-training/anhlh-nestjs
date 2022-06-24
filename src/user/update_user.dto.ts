@@ -3,6 +3,7 @@ import {
   IsDate,
   IsEmail,
   IsNotEmpty,
+  IsString,
   MaxLength,
   Min,
   MinLength,
@@ -22,6 +23,7 @@ export class UpdateUserDto {
   @IsNotEmpty({ message: 'Password cannot be left blank' })
   password: string;
 
+  @IsString()
   @MaxLength(45)
   @IsNotEmpty({ message: 'FullName cannot be left blank' })
   full_name: string;
@@ -30,6 +32,7 @@ export class UpdateUserDto {
   @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
   ward_id: number;
 
+  @IsString()
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;
 

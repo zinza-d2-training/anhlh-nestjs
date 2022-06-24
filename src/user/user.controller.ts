@@ -10,8 +10,8 @@ import { IsUser } from 'src/utils/check_user.guard';
 export class UserController {
   constructor(private readonly UserService: UserService) {}
 
-  @Get('/')
-  findOne(@GetUser('id') id: string) {
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
     return this.UserService.findOne(id);
   }
 
