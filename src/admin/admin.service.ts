@@ -6,14 +6,18 @@ import {
   CreateDataVaccinationSiteDto,
   UpdateDataVaccinationSiteDto,
 } from './vaccination_site.dto';
+<<<<<<< HEAD
 import VaccineRegistration from 'src/entities/vaccine_registration';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
+=======
+>>>>>>> master
 
 @Injectable()
 export class AdminService {
   constructor(
     @InjectRepository(VaccinationSite)
     private readonly vaccinationSite: Repository<VaccinationSite>,
+<<<<<<< HEAD
     @InjectRepository(VaccineRegistration)
     private readonly vaccineRegistrationRepository: Repository<VaccineRegistration>,
   ) {}
@@ -22,6 +26,14 @@ export class AdminService {
     return await this.vaccinationSite.save(body);
   }
 
+=======
+  ) {}
+
+  async getDataVaccinationSite() {}
+  async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
+    return await this.vaccinationSite.save(body);
+  }
+>>>>>>> master
   async updateDataVaccinationSite(
     id: string,
     body: UpdateDataVaccinationSiteDto,
@@ -32,6 +44,7 @@ export class AdminService {
 
     return await this.vaccinationSite.update(vaccinationSite, body);
   }
+<<<<<<< HEAD
 
   async getAllUserRegisterInjection() {
     return await this.vaccineRegistrationRepository.find();
@@ -48,4 +61,6 @@ export class AdminService {
       body,
     );
   }
+=======
+>>>>>>> master
 }
