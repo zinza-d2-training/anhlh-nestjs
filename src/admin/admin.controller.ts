@@ -67,7 +67,6 @@ export class AdminController {
     return await this.adminService.updateUser(id, body);
   }
 
-  @UseGuards(JwtAuthGuard, IsAdmin)
   @Put('documents/:id')
   async updateDocument(
     @Param('id') id: string,

@@ -39,22 +39,15 @@ export class VaccineRegistrationService {
     });
   }
 
-<<<<<<< HEAD
-  async getUserRegisterInjection(id: string) {
-=======
   async getAllUserRegisterInjection(id: string) {
->>>>>>> master
     return await this.vaccineRegistrationRepository.findOne({
       where: { user_id: id },
     });
   }
-<<<<<<< HEAD
-=======
 
   async getUserRegisterInjection(id: string) {
     return await this.vaccineRegistrationRepository.findOne({
       where: { id },
     });
   }
->>>>>>> master
 }
