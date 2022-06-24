@@ -1,7 +1,7 @@
 import { Controller, Post, UseGuards, Get, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './jwt-auth.guard';
+import { JwtAuthGuard } from '../utils/jwt-auth.guard';
 import { GetUser } from './get-user.decorators';
 import { UserLoginInterface } from './user-login.interface';
 import { UserRegisterDto } from './user-register.dto';
@@ -27,7 +27,7 @@ export class AuthController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('profile')
+  @Get('profiles')
   async getProfile(@GetUser('id') id: number) {
     return await this.authService.getProfile(id);
   }

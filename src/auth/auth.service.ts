@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
 import User from 'src/entities/User';
 import { Repository } from 'typeorm';
 import { UserLoginInterface } from './user-login.interface';
-import { UserRegisterDto } from './user-register.dto';
 import { ValidateUserException } from 'src/utils/validate.exception';
+import { UserRegisterDto } from './user-register.dto';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -36,14 +36,13 @@ export class AuthService {
   }
 
   async login(user: UserLoginInterface) {
-    const payload = { email: user.email, sub: user.id };
+    const payload = { email: user.email, sub: user.id, role: user.role };
     return {
       id: user.id,
       email: user.email,
       access_token: this.jwtService.sign(payload),
     };
   }
-
   async registerUser(body: UserRegisterDto) {
     const {
       email,
@@ -69,7 +68,7 @@ export class AuthService {
         email: ['Email does exist'],
       });
     }
-    const hashPass = await bcrypt.hashSync(password, saltRounds);
+    const hashPass = bcrypt.hashSync(password, saltRounds);
     const user = await this.userRepository.save({
       email,
       password: hashPass,
