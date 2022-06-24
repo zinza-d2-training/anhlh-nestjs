@@ -12,7 +12,6 @@ export class CreateDataVaccinationSiteDto {
   total_table: number;
 
   @IsString()
-  @IsString()
   @MaxLength(45)
   @IsNotEmpty({ message: 'manager cannot be left blank' })
   manager: string;
