@@ -10,6 +10,7 @@ import VaccineRegistration from 'src/entities/vaccine_registration';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 import User from 'src/entities/User';
 import { UpdateUserDto } from 'src/user/update_user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AdminService {
@@ -33,7 +34,12 @@ export class AdminService {
     const vaccinationSite = await this.vaccinationSite.findOne({
       where: { id },
     });
-
+    if (!vaccinationSite) {
+      return {
+        message: 'vaccination Site does not exist',
+        status: 422,
+      };
+    }
     return await this.vaccinationSite.update(vaccinationSite, body);
   }
 
@@ -47,6 +53,12 @@ export class AdminService {
   ) {
     const userRegisterInjection =
       await this.vaccineRegistrationRepository.findOne({ where: { id } });
+    if (!userRegisterInjection) {
+      return {
+        message: 'info register Injection does not exist',
+        status: 422,
+      };
+    }
     return await this.vaccineRegistrationRepository.update(
       userRegisterInjection,
       body,
@@ -57,8 +69,31 @@ export class AdminService {
     return await this.userRepository.find();
   }
 
+  async getUser(id: string) {
+    const user = await this.userRepository.findOne({ where: { id } });
+    if (!user) {
+      return {
+        message: 'user does not exist',
+        status: 422,
+      };
+    }
+    return user;
+  }
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ where: { id } });
-    return await this.userRepository.update(user, updateUserDto);
+    const { password } = updateUserDto;
+    if (!user) {
+      return {
+        message: 'user does not exist',
+        status: 422,
+      };
+    }
+    const saltRounds = 10;
+    const hashPass = bcrypt.hashSync(password, saltRounds);
+
+    return await this.userRepository.update(user, {
+      ...updateUserDto,
+      password: hashPass,
+    });
   }
 }

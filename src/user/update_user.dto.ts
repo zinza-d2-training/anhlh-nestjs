@@ -3,6 +3,7 @@ import {
   IsDate,
   IsEmail,
   IsNotEmpty,
+  IsString,
   MaxLength,
   Min,
   MinLength,
@@ -11,17 +12,20 @@ import { CheckLength } from 'src/auth/customer-length.validation';
 import { AllowNotSpace } from 'src/auth/customer-space.validation';
 
 export class UpdateUserDto {
+  @IsString()
   @MaxLength(45)
   @IsEmail({ message: 'Email does not match' })
   @IsNotEmpty({ message: 'Email cannot be left blank' })
   email: string;
 
+  @IsString()
   @MinLength(8)
   @MaxLength(255)
   @AllowNotSpace({ message: 'Password not allow space' })
   @IsNotEmpty({ message: 'Password cannot be left blank' })
   password: string;
 
+  @IsString()
   @MaxLength(45)
   @IsNotEmpty({ message: 'FullName cannot be left blank' })
   full_name: string;
@@ -30,6 +34,7 @@ export class UpdateUserDto {
   @IsNotEmpty({ message: 'Ward_id cannot be left blank' })
   ward_id: number;
 
+  @IsString()
   @IsNotEmpty({ message: 'Gender cannot be left blank' })
   gender: string;
 
@@ -38,6 +43,7 @@ export class UpdateUserDto {
   @IsNotEmpty({ message: 'Birthday cannot be left blank' })
   birthday: Date;
 
+  @Min(1)
   @CheckLength({ message: 'Identity Card Number equal 9 or equal 12' })
   @IsNotEmpty({ message: 'Identity Card Number cannot be left blank' })
   identity_card_number: number;

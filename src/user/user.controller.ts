@@ -10,16 +10,13 @@ import { IsUser } from 'src/utils/check_user.guard';
 export class UserController {
   constructor(private readonly UserService: UserService) {}
 
-  @Get('/')
-  findOne(@GetUser('id') id: string) {
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
     return this.UserService.findOne(id);
   }
 
   @Patch('/:id')
-  async update(
-    @GetUser('id') id: string,
-    @Body() updateUserDto: UpdateUserDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return await this.UserService.update(+id, updateUserDto);
   }
 }
