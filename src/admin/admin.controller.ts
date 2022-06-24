@@ -21,7 +21,7 @@ import { UpdateUserRegisterInjectionDto } from './update_user_register_injection
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post('/vaccine-site/create')
+  @Post('/vaccine-site')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.adminService.createDataVaccinationSite(body);
   }
@@ -34,12 +34,12 @@ export class AdminController {
     return await this.adminService.updateDataVaccinationSite(id, body);
   }
 
-  @Get('/vaccine-registration/show')
+  @Get('/vaccine-registration/list')
   async getAllUserRegisterInjection() {
     return await this.adminService.getAllUserRegisterInjection();
   }
 
-  @Put('/vaccine-registration/:id')
+  @Put('/vaccine-registration/show/:id')
   async UpdateUserRegisterInjection(
     @Param('id') id: string,
     @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,

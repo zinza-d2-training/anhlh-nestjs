@@ -13,12 +13,12 @@ import { RegisterInjectionDto } from './register_injection.dto';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 import { VaccineRegistrationService } from './vaccine_registration.service';
 
-@Controller('/vaccine-registration')
+@Controller('/vaccine-registrations')
 export class VaccineRegistrationController {
   constructor(private vaccineRegistrationService: VaccineRegistrationService) {}
 
   @UseGuards(JwtAuthGuard)
-  @Post('/create')
+  @Post('/')
   async createRegisterInjection(
     @GetUser('id', ParseIntPipe) id: number,
     @Body() body: UpdateUserRegisterInjectionDto,
@@ -30,7 +30,7 @@ export class VaccineRegistrationController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('/info')
+  @Get('/shows/:id')
   async getUserRegisterInjection(@GetUser('id') id: string) {
     return await this.vaccineRegistrationService.getUserRegisterInjection(id);
   }

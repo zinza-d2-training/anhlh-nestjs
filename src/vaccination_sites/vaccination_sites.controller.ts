@@ -6,11 +6,11 @@ export class VaccinationSiteController {
   constructor(
     private readonly vaccinationSiteService: VaccinationSiteService,
   ) {}
-  @Get('/all')
+  @Get('/list')
   async getAllDataVaccinationSite() {
     return await this.vaccinationSiteService.getAllDataVaccinationSite();
   }
-  @Get('/:id')
+  @Get('/show/:id')
   async getDataVaccinationSite(@Param('id') id: string) {
     return await this.vaccinationSiteService.getDataVaccinationSite(id);
   }

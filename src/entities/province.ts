@@ -17,7 +17,7 @@ class Province {
   public name: string;
 
   @OneToMany(() => District, (district) => district.province)
-  district: District[];
+  districts: District[];
 
   @Column({
     type: 'timestamp',

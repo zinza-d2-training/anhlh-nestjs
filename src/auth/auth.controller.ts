@@ -27,8 +27,8 @@ export class AuthController {
     return this.authService.logout();
   }
 
-  @UseGuards(JwtAuthGuard, IsAdmin)
-  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  @Get('profiles')
   async getProfile(@GetUser('id') id: number) {
     return await this.authService.getProfile(id);
   }
