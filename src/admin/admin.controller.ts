@@ -15,6 +15,7 @@ import {
 } from './vaccination_site.dto';
 import { AdminService } from './admin.service';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
+import { UpdateUserDto } from 'src/user/update_user.dto';
 
 @UseGuards(JwtAuthGuard, IsAdmin)
 @Controller('/admins')
@@ -48,5 +49,20 @@ export class AdminController {
       id,
       updateUserRegisterInjectionDto,
     );
+  }
+
+  @Get('/users')
+  async getAllUser() {
+    return await this.adminService.getAllUser();
+  }
+
+  @Get('users/:id')
+  async getUser(@Param('id') id: string) {
+    return await this.adminService.getUser(id);
+  }
+
+  @Put('users/:id')
+  async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
+    return await this.adminService.updateUser(id, body);
   }
 }
