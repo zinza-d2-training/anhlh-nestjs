@@ -77,14 +77,11 @@ export class AdminService {
     return await this.userRepository.find();
   }
 
-  async updateUser(id: string, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOne({ where: { id } });
-    return await this.userRepository.update(user, updateUserDto);
-  }
-
   async updateDocument(id: string, body: UpdateDocumentDto) {
     const document = await this.documentRepository.findOne({ where: { id } });
     return await this.documentRepository.update(document, body);
+  }
+  
   async getUser(id: string) {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
