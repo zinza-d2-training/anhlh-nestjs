@@ -15,18 +15,18 @@ import {
 } from './vaccination_site.dto';
 import { AdminService } from './admin.service';
 
-@Controller('/admin')
+@Controller('/admins')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   @UseGuards(JwtAuthGuard, IsAdmin)
-  @Post('/vaccine-registration/create')
+  @Post('/vaccine-registrations')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.adminService.createDataVaccinationSite(body);
   }
 
   @UseGuards(JwtAuthGuard, IsAdmin)
-  @Put('/vaccine-registration/update/:id')
+  @Put('/vaccine-registrations/:id')
   async updateDataVaccinationSite(
     @Param('id') id: string,
     @Body() body: UpdateDataVaccinationSiteDto,
