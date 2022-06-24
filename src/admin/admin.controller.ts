@@ -18,16 +18,16 @@ import { UpdateUserRegisterInjectionDto } from './update_user_register_injection
 import { UpdateUserDto } from 'src/user/update_user.dto';
 
 @UseGuards(JwtAuthGuard, IsAdmin)
-@Controller('/admin')
+@Controller('/admins')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post('/vaccine-site/create')
+  @Post('/vaccine-sites')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.adminService.createDataVaccinationSite(body);
   }
 
-  @Put('/vaccine-site/update/:id')
+  @Put('/vaccine-sites/:id')
   async updateDataVaccinationSite(
     @Param('id') id: string,
     @Body() body: UpdateDataVaccinationSiteDto,
@@ -35,12 +35,12 @@ export class AdminController {
     return await this.adminService.updateDataVaccinationSite(id, body);
   }
 
-  @Get('/vaccine-registration/show')
+  @Get('/vaccine-registrations')
   async getAllUserRegisterInjection() {
     return await this.adminService.getAllUserRegisterInjection();
   }
 
-  @Put('/vaccine-registration/:id')
+  @Put('/vaccine-registrations/:id')
   async UpdateUserRegisterInjection(
     @Param('id') id: string,
     @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
@@ -51,12 +51,12 @@ export class AdminController {
     );
   }
 
-  @Get('/userAll')
+  @Get('/users')
   async getUser() {
     return await this.adminService.getAllUser();
   }
 
-  @Put('user/:id')
+  @Put('users/:id')
   async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return await this.adminService.updateUser(id, body);
   }
