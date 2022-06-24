@@ -5,6 +5,7 @@ import { JwtAuthGuard } from '../utils/jwt-auth.guard';
 import { GetUser } from './get-user.decorators';
 import { UserLoginInterface } from './user-login.interface';
 import { UserRegisterDto } from './user-register.dto';
+import { IsAdmin } from 'src/utils/check_admin.guard';
 
 @Controller('/auth')
 export class AuthController {

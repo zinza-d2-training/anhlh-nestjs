@@ -19,7 +19,10 @@ export class ForgotPasswordService {
       where: { email },
     });
     if (!user) {
-      return new UnauthorizedException('Email does not exist', '404');
+      return {
+        message: 'Email does not exist',
+        status: 422,
+      };
     }
     const payload = { email: user.email, sub: user.id };
     const token = this.jwtService.sign(payload);
@@ -35,6 +38,10 @@ export class ForgotPasswordService {
         url,
       },
     });
+    return {
+      status: 200,
+      message: 'success',
+    };
   }
   async restPassword(token: string) {
     const hasToken = await this.userRepository.find({

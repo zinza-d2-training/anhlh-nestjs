@@ -6,18 +6,22 @@ import {
   CreateDataVaccinationSiteDto,
   UpdateDataVaccinationSiteDto,
 } from './vaccination_site.dto';
+import VaccineRegistration from 'src/entities/vaccine_registration';
+import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 
 @Injectable()
 export class AdminService {
   constructor(
     @InjectRepository(VaccinationSite)
     private readonly vaccinationSite: Repository<VaccinationSite>,
+    @InjectRepository(VaccineRegistration)
+    private readonly vaccineRegistrationRepository: Repository<VaccineRegistration>,
   ) {}
 
-  async getDataVaccinationSite() {}
   async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
     return await this.vaccinationSite.save(body);
   }
+
   async updateDataVaccinationSite(
     id: string,
     body: UpdateDataVaccinationSiteDto,
@@ -25,7 +29,34 @@ export class AdminService {
     const vaccinationSite = await this.vaccinationSite.findOne({
       where: { id },
     });
-
+    if (!vaccinationSite) {
+      return {
+        message: 'vaccination Site does not exist',
+        status: 422,
+      };
+    }
     return await this.vaccinationSite.update(vaccinationSite, body);
+  }
+
+  async getAllUserRegisterInjection() {
+    return await this.vaccineRegistrationRepository.find();
+  }
+
+  async updateUserRegisterInjection(
+    id: string,
+    body: UpdateUserRegisterInjectionDto,
+  ) {
+    const userRegisterInjection =
+      await this.vaccineRegistrationRepository.findOne({ where: { id } });
+    if (!userRegisterInjection) {
+      return {
+        message: 'info register Injection does not exist',
+        status: 422,
+      };
+    }
+    return await this.vaccineRegistrationRepository.update(
+      userRegisterInjection,
+      body,
+    );
   }
 }

@@ -14,23 +14,39 @@ import {
   UpdateDataVaccinationSiteDto,
 } from './vaccination_site.dto';
 import { AdminService } from './admin.service';
+import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 
+@UseGuards(JwtAuthGuard, IsAdmin)
 @Controller('/admins')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @UseGuards(JwtAuthGuard, IsAdmin)
-  @Post('/vaccine-registrations')
+  @Post('/vaccine-sites')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.adminService.createDataVaccinationSite(body);
   }
 
-  @UseGuards(JwtAuthGuard, IsAdmin)
-  @Put('/vaccine-registrations/:id')
+  @Put('/vaccine-sites/:id')
   async updateDataVaccinationSite(
     @Param('id') id: string,
     @Body() body: UpdateDataVaccinationSiteDto,
   ) {
     return await this.adminService.updateDataVaccinationSite(id, body);
+  }
+
+  @Get('/vaccine-registrations')
+  async getAllUserRegisterInjection() {
+    return await this.adminService.getAllUserRegisterInjection();
+  }
+
+  @Put('/vaccine-registrations/:id')
+  async UpdateUserRegisterInjection(
+    @Param('id') id: string,
+    @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
+  ) {
+    return await this.adminService.updateUserRegisterInjection(
+      id,
+      updateUserRegisterInjectionDto,
+    );
   }
 }

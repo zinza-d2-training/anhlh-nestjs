@@ -1,16 +1,15 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class province1654520666965 implements MigrationInterface {
+export class priority_group1655886553305 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'provinces',
+        name: 'priority_groups',
         columns: [
           {
             name: 'id',
             type: 'int',
             isPrimary: true,
-            length: '11',
             isGenerated: true,
             generationStrategy: 'increment',
           },
@@ -38,6 +37,6 @@ export class province1654520666965 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('provinces');
+    await queryRunner.dropTable('priority_groups');
   }
 }
