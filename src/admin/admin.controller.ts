@@ -56,7 +56,7 @@ export class AdminController {
     return await this.adminService.getAllUser();
   }
 
-  @Get('/:id')
+  @Get('users/:id')
   async getUser(@Param('id') id: string) {
     return await this.adminService.getUser(id);
   }

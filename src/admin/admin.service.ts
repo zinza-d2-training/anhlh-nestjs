@@ -79,6 +79,7 @@ export class AdminService {
     }
     return user;
   }
+
   async updateUser(id: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ where: { id } });
     const { password } = updateUserDto;

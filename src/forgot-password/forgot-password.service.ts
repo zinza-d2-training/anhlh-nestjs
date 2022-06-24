@@ -19,7 +19,10 @@ export class ForgotPasswordService {
       where: { email },
     });
     if (!user) {
-      return new UnauthorizedException('Email does not exist', '422');
+      return {
+        message: 'Email does not exist',
+        status: 422,
+      };
     }
     const payload = { email: user.email, sub: user.id };
     const token = this.jwtService.sign(payload);
