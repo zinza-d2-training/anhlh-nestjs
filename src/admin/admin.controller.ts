@@ -34,12 +34,12 @@ export class AdminController {
     return await this.adminService.updateDataVaccinationSite(id, body);
   }
 
-  @Get('/vaccine-registrations/lists')
+  @Get('/vaccine-registrations')
   async getAllUserRegisterInjection() {
     return await this.adminService.getAllUserRegisterInjection();
   }
 
-  @Put('/vaccine-registrations/shows/:id')
+  @Put('/vaccine-registrations/:id')
   async UpdateUserRegisterInjection(
     @Param('id') id: string,
     @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,
