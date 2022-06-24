@@ -17,16 +17,16 @@ import { AdminService } from './admin.service';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 
 @UseGuards(JwtAuthGuard, IsAdmin)
-@Controller('/admin')
+@Controller('/admins')
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post('/vaccine-site')
+  @Post('/vaccine-sites')
   async createDataVaccinationSite(@Body() body: CreateDataVaccinationSiteDto) {
     return await this.adminService.createDataVaccinationSite(body);
   }
 
-  @Put('/vaccine-site/update/:id')
+  @Put('/vaccine-sites/:id')
   async updateDataVaccinationSite(
     @Param('id') id: string,
     @Body() body: UpdateDataVaccinationSiteDto,
@@ -34,12 +34,12 @@ export class AdminController {
     return await this.adminService.updateDataVaccinationSite(id, body);
   }
 
-  @Get('/vaccine-registration/list')
+  @Get('/vaccine-registrations/lists')
   async getAllUserRegisterInjection() {
     return await this.adminService.getAllUserRegisterInjection();
   }
 
-  @Put('/vaccine-registration/show/:id')
+  @Put('/vaccine-registrations/shows/:id')
   async UpdateUserRegisterInjection(
     @Param('id') id: string,
     @Body() updateUserRegisterInjectionDto: UpdateUserRegisterInjectionDto,

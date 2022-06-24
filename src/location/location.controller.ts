@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { LocationService } from './location.service';
 
-@Controller('/data-administrative-unit')
+@Controller('/data-administrative-units')
 export class LocationController {
   constructor(private locationService: LocationService) {}
 
