@@ -1,10 +1,12 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateDocumentDto {
+  @IsString()
   @IsNotEmpty({ message: 'name cannot be left blank' })
   name: string;
 
+  @IsString()
   @IsNotEmpty({ message: 'link cannot be left blank' })
   link: string;
 }
