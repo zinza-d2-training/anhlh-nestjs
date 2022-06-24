@@ -39,9 +39,15 @@ export class VaccineRegistrationService {
     });
   }
 
-  async getUserRegisterInjection(id: string) {
+  async getAllUserRegisterInjection(id: string) {
     return await this.vaccineRegistrationRepository.findOne({
       where: { user_id: id },
+    });
+  }
+
+  async getUserRegisterInjection(id: string) {
+    return await this.vaccineRegistrationRepository.findOne({
+      where: { id },
     });
   }
 }

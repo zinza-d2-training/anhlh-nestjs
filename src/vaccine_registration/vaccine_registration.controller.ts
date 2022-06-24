@@ -31,8 +31,15 @@ export class VaccineRegistrationController {
   }
 
   @UseGuards(JwtAuthGuard, IsUser)
+  @Get('/')
+  async getAllUserRegisterInjection(@GetUser('id') id: string) {
+    return await this.vaccineRegistrationService.getAllUserRegisterInjection(
+      id,
+    );
+  }
+
   @Get('/:id')
-  async getUserRegisterInjection(@GetUser('id') id: string) {
+  async getUserRegisterInjection(@Param('id') id: string) {
     return await this.vaccineRegistrationService.getUserRegisterInjection(id);
   }
 }
