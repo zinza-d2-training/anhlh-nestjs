@@ -1,9 +1,11 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UpdateUserDto } from './update_user.dto';
 import User from 'src/entities/User';
-import { CreateUserDto } from './create-user.dto';
+import * as bcrypt from 'bcrypt';
+import { ValidateUserException } from 'src/utils/validate.exception';
+import { JwtAuthGuard } from 'src/utils/jwt-auth.guard';
 
 @Injectable()
 export class UserService {
@@ -12,21 +14,20 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async findOne(email: string) {
-    return await this.userRepository.findOne({ email });
-  }
-
-  async findAll() {
-    return await this.userRepository.find();
+  async findOne(id: string) {
+    return await this.userRepository.findOne({ where: { id } });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ id });
-    Object.assign(user, updateUserDto);
-    return await this.userRepository.save(user);
-  }
+    const { password } = updateUserDto;
 
-  async createUser(body: CreateUserDto) {
-    return this.userRepository.create(body);
+    const saltRounds = 10;
+    const hashPass = bcrypt.hashSync(password, saltRounds);
+
+    return await this.userRepository.update(user, {
+      ...updateUserDto,
+      password: hashPass,
+    });
   }
 }

@@ -1,4 +1,12 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import Ward from './ward';
 
 @Entity('vaccination_sites')
@@ -21,7 +29,8 @@ class VaccinationSite {
   @Column()
   public name: string;
 
-  @OneToOne(() => Ward)
+  @ManyToOne(() => Ward, (ward) => ward.vaccination_sites)
+  @JoinColumn({ name: 'ward_id' })
   ward: Ward;
 
   @Column({

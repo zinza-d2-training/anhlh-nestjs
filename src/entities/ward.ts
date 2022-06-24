@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -25,7 +26,10 @@ class Ward {
 
   @ManyToOne(() => District, (district) => district.wards)
   @JoinColumn({ name: 'district_id' })
-  districts: District;
+  district: District;
+
+  @OneToMany(() => Ward, (vaccination_site) => vaccination_site['ward'])
+  vaccination_sites: Ward[];
 
   @Column({
     type: 'timestamp',

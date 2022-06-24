@@ -20,11 +20,11 @@ class District {
   @Column()
   public province_id: number;
 
-  @ManyToOne(() => Province, (province) => province.district)
+  @ManyToOne(() => Province, (province) => province.districts)
   @JoinColumn({ name: 'province_id' })
   province: Province;
 
-  @OneToMany(() => Ward, (ward) => ward.districts)
+  @OneToMany(() => Ward, (ward) => ward.district)
   wards: Ward[];
   @Column({
     type: 'timestamp',

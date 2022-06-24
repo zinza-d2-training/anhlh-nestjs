@@ -1,15 +1,11 @@
-import { forwardRef, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import Ward from 'src/entities/ward';
-import { Repository } from 'typeorm';
+import Ward from '../entities/ward';
+import { createQueryBuilder, getRepository, In, Repository } from 'typeorm';
 import VaccinationSite from 'src/entities/vaccination_site';
 import District from 'src/entities/district';
 import Province from 'src/entities/province';
-import { DataVaccinationSite, RequestDataVaccinationSite } from './type';
-import {
-  CreateDataVaccinationSiteDto,
-  UpdateDataVaccinationSiteDto,
-} from './vaccination_site.dto';
+import { DataVaccinationSite } from './type';
 
 @Injectable()
 export class VaccinationSiteService {
@@ -25,50 +21,93 @@ export class VaccinationSiteService {
   ) {}
 
   async getAllDataVaccinationSite() {
-    const DataVaccinationSite: DataVaccinationSite[] = [];
-    const vaccination_sites = await this.vaccinationSite.find();
-    vaccination_sites.map((vaccinationSite) => {
+    let dataVaccinationSites = [];
+    const vaccinationSites = await this.vaccinationSite.find();
+
+    vaccinationSites.map((vaccinationSite) => {
       let { id, total_table, street_name, manager, name } = vaccinationSite;
-      DataVaccinationSite.push({ id, total_table, manager, street_name, name });
+      dataVaccinationSites.push({
+        id,
+        total_table,
+        manager,
+        street_name,
+        name,
+      });
     });
-    for (let i = 0; i < vaccination_sites.length; i++) {
-      const ward_id = vaccination_sites[i]['ward_id'];
-      const ward = await this.wardRepository.findOne({
-        where: { id: ward_id },
-      });
-      const district = await this.districtRepository.findOne({
-        where: { id: ward['district_id'] },
-      });
-      const province = await this.provinceRepository.findOne({
-        where: { id: district['province_id'] },
-      });
-      DataVaccinationSite[i]['ward'] = {
-        id: ward.id,
-        name: ward.name,
-      };
-      DataVaccinationSite[i]['district'] = {
-        id: district.id,
-        name: district.name,
-      };
-      DataVaccinationSite[i]['province'] = {
-        id: province.id,
-        name: province.name,
-      };
-    }
-    return DataVaccinationSite;
-  }
-  async getDataVaccinationSite() {}
-  async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
-    return await this.vaccinationSite.save(body);
-  }
-  async updateDataVaccinationSite(
-    id: string,
-    body: UpdateDataVaccinationSiteDto,
-  ) {
-    const vaccinationSite = await this.vaccinationSite.findOne({
-      where: { id },
+    let wardIds = [];
+    vaccinationSites.map((vaccinationSite) => {
+      wardIds.push(vaccinationSite['ward_id']);
+    });
+    const wardFormDBs = await this.wardRepository.find({
+      where: { id: In([wardIds]) },
     });
 
-    return await this.vaccinationSite.update(vaccinationSite, body);
+    let districtIds = [];
+    wardFormDBs.map((wardFormDB) => {
+      districtIds.push(wardFormDB['district_id']);
+    });
+
+    const districtFromDBs = await this.districtRepository.find({
+      where: { id: In([districtIds]) },
+    });
+    let provinceIds = [];
+    districtFromDBs.map((districtsFromDB) => {
+      provinceIds.push(districtsFromDB['province_id']);
+    });
+
+    const provinceFromDBs = await this.provinceRepository.find({
+      where: { id: In([provinceIds]) },
+    });
+    districtFromDBs.map((district) => {
+      district.wards = [];
+      wardFormDBs.map((ward) => {
+        if (district.id === ward['district_id']) {
+          district.wards.push(ward);
+        }
+      });
+      return district;
+    });
+    provinceFromDBs.map((province) => {
+      province['districts'] = [];
+      districtFromDBs.map((district) => {
+        if (province.id === district['province_id']) {
+          province['districts'].push(district);
+        }
+      });
+      return province;
+    });
+
+    dataVaccinationSites.map((dataVaccinationSite) => {
+      dataVaccinationSite.province = [];
+      provinceFromDBs.map((province) => {
+        dataVaccinationSite.province.push(province);
+      });
+      return dataVaccinationSite;
+    });
+    return dataVaccinationSites;
+  }
+  async getDataVaccinationSite(id: string) {
+    const vaccination_site = await this.vaccinationSite.findOne({
+      where: { id },
+    });
+    const { total_table, manager, street_name, name } = vaccination_site;
+    let dataVaccinationSite: DataVaccinationSite = null;
+    dataVaccinationSite = {
+      id: vaccination_site.id,
+      total_table,
+      manager,
+      street_name,
+      name,
+    };
+
+    const district = await this.districtRepository.findOne({
+      relations: ['province'],
+    });
+    let ward = await this.wardRepository.findOne({
+      where: { id: vaccination_site.ward_id },
+    });
+    ward.district = district;
+    dataVaccinationSite['ward'] = ward;
+    return dataVaccinationSite;
   }
 }
