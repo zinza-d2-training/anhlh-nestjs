@@ -29,7 +29,12 @@ export class AdminService {
     const vaccinationSite = await this.vaccinationSite.findOne({
       where: { id },
     });
-
+    if (!vaccinationSite) {
+      return {
+        message: 'vaccination Site does not exist',
+        status: 422,
+      };
+    }
     return await this.vaccinationSite.update(vaccinationSite, body);
   }
 
@@ -43,6 +48,12 @@ export class AdminService {
   ) {
     const userRegisterInjection =
       await this.vaccineRegistrationRepository.findOne({ where: { id } });
+    if (!userRegisterInjection) {
+      return {
+        message: 'info register Injection does not exist',
+        status: 422,
+      };
+    }
     return await this.vaccineRegistrationRepository.update(
       userRegisterInjection,
       body,
