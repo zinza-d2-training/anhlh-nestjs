@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Post, StreamableFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import VaccinationSite from 'src/entities/vaccination_site';
@@ -8,9 +8,13 @@ import {
 } from './vaccination_site.dto';
 import VaccineRegistration from 'src/entities/vaccine_registration';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
-import User from 'src/entities/User';
+import User from 'src/entities/user';
 import { UpdateUserDto } from 'src/user/update_user.dto';
+import { UpdateDocumentDto } from 'src/document/update_document.dto';
+import Document from 'src/entities/document';
 import * as bcrypt from 'bcrypt';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class AdminService {
@@ -21,6 +25,8 @@ export class AdminService {
     private readonly vaccineRegistrationRepository: Repository<VaccineRegistration>,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    @InjectRepository(Document)
+    private readonly documentRepository: Repository<Document>,
   ) {}
 
   async createDataVaccinationSite(body: CreateDataVaccinationSiteDto) {
@@ -67,6 +73,22 @@ export class AdminService {
 
   async getAllUser() {
     return await this.userRepository.find();
+  }
+
+  async updateDocument(id: string, body: UpdateDocumentDto) {
+    const document = await this.documentRepository.findOne({ where: { id } });
+    return await this.documentRepository.update(document, body);
+  }
+
+  async uploadFile(file: Express.Multer.File, name: string) {
+    const { filename } = file;
+    await this.documentRepository.save({
+      name: name,
+      link: filename,
+    });
+    return {
+      message: 'upload success',
+    };
   }
 
   async getUser(id: string) {

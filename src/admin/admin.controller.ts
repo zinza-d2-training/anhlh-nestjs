@@ -5,7 +5,11 @@ import {
   Param,
   Post,
   Put,
+  StreamableFile,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
+  Response,
 } from '@nestjs/common';
 import { IsAdmin } from 'src/utils/check_admin.guard';
 import { JwtAuthGuard } from '../utils/jwt-auth.guard';
@@ -16,6 +20,10 @@ import {
 import { AdminService } from './admin.service';
 import { UpdateUserRegisterInjectionDto } from './update_user_register_injection.dto';
 import { UpdateUserDto } from 'src/user/update_user.dto';
+import { UpdateDocumentDto } from 'src/document/update_document.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { createReadStream } from 'fs';
+import path, { join } from 'path';
 
 @UseGuards(JwtAuthGuard, IsAdmin)
 @Controller('/admins')
@@ -64,5 +72,22 @@ export class AdminController {
   @Put('users/:id')
   async updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return await this.adminService.updateUser(id, body);
+  }
+
+  @Put('documents/:id')
+  async updateDocument(
+    @Param('id') id: string,
+    @Body() body: UpdateDocumentDto,
+  ) {
+    return await this.adminService.updateDocument(id, body);
+  }
+
+  @Post('/upload')
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(
+    @UploadedFile() file: Express.Multer.File,
+    @Body('name') name: string,
+  ) {
+    return await this.adminService.uploadFile(file, name);
   }
 }

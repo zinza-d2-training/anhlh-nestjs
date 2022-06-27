@@ -16,7 +16,10 @@ export class UserController {
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+  async update(
+    @GetUser('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     return await this.UserService.update(+id, updateUserDto);
   }
 }
