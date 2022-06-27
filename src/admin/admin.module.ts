@@ -7,6 +7,7 @@ import { AdminController } from './admin.controller';
 import VaccineRegistration from 'src/entities/vaccine_registration';
 import User from 'src/entities/User';
 import Document from 'src/entities/document';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -16,6 +17,9 @@ import Document from 'src/entities/document';
       User,
       Document,
     ]),
+    MulterModule.register({
+      dest: './upload',
+    }),
   ],
   controllers: [AdminController],
   providers: [AdminService, JwtStrategy],
