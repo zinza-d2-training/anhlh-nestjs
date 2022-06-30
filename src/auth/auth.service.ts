@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { InjectRepository } from '@nestjs/typeorm';
-import User from 'src/entities/User';
+import User from 'src/entities/user';
 import { Repository } from 'typeorm';
 import { UserLoginInterface } from './user-login.interface';
 import { ValidateUserException } from 'src/utils/validate.exception';

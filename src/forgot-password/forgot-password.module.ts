@@ -5,7 +5,7 @@ import { ForgotPasswordController } from './forgot-password.controller';
 import { MailerModule } from '@nestjs-modules/mailer';
 import * as dotenv from 'dotenv';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import User from 'src/entities/User';
+import User from 'src/entities/user';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/auth/constants';
 dotenv.config();
