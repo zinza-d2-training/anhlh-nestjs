@@ -1,0 +1,47 @@
+ version: "2.2.3"
+
+ networks:
+  api-net:
+    driver: bridge
+
+ services:
+    api:
+        networks:
+            - api-net
+        build:
+            dockerfile: Dockerfile
+        restart: always
+        environment: 
+            MYSQL_DB_PORT: 3306   
+        ports:
+            - "3000:3000"
+        env_file:
+            - .env
+        volumes:
+            - api:/var/www/html
+            - /app/node_modules/bcrypt/
+        depends_on: 
+            - mysql2
+
+
+    mysql2:
+        image: mysql:8.0
+        expose:
+            - "3306"
+        ports:
+            - "3366:3306"
+        environment: 
+            MYSQL_HOST: mysql2
+            MYSQL_PORT: 3306
+            MYSQL_USERNAME: root
+            MYSQL_DATABASE: projectnestjs
+            MYSQL_ALLOW_EMPTY_PASSWORD: true 
+        volumes:
+            - mysql2:/var/lib/mysql2
+        networks:
+            - api-net
+ volumes:
+  api:
+  mysql2:
+
+  

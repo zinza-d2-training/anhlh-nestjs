@@ -5,7 +5,7 @@ import { JwtStrategy } from '../utils/jwt.strategy';
 import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import VaccineRegistration from 'src/entities/vaccine_registration';
-import User from 'src/entities/User';
+import User from 'src/entities/user';
 import Document from 'src/entities/document';
 import { MulterModule } from '@nestjs/platform-express';
 
